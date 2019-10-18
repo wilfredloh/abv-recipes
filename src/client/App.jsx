@@ -3,6 +3,7 @@ import { hot } from 'react-hot-loader';
 
 import Counter from './components/counter/counter';
 import Form from './components/form/form';
+import Recipe from './components/recipe/recipe';
 
 class App extends React.Component {
   constructor() {
@@ -15,9 +16,10 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <Form />
-        Welcome.
-        <Counter message={this.state.message} />
+        {/* <Form /> */}
+        <Recipe />
+        {/* Welcome. */}
+        {/* <Counter message={this.state.message} /> */}
       </div>
     );
   }

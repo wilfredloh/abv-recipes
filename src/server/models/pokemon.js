@@ -45,10 +45,10 @@ module.exports = (dbPoolInstance) => {
     });
   };
 
-  let get = (id, callback) => {
-    const values = [id];
+  let get = (callback) => {
+    // const values = [id];
 
-    dbPoolInstance.query('SELECT * from pokemons WHERE id=$1', values, (error, queryResult) => {
+    dbPoolInstance.query('SELECT * from recipes', (error, queryResult) => {
       if( error ){
 
         // invoke callback function with results after query has executed
