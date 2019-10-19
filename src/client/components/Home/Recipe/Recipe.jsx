@@ -11,11 +11,17 @@ class Recipe extends React.Component {
     }
 
     render() {
-
+        // let recipe = this.props.recipe
+        console.log('recipe: ', this.props.recipe)
+        let recipe = this.props.recipe ? 
+                <div>
+                    <p>{this.props.recipe.name}</p>
+                    <img src={this.props.recipe.img}/>
+                </div>
+        : "test";
         return (
             <div>
-                <p>Title</p>
-                <p>Image</p>
+                {recipe}
                 <p>Ingredients blalbalfall baflsld blalfasd blav fad as  sdad asd asd asda sdas d </p>
                 <p>Instructions</p>
             </div>

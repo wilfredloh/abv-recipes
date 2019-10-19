@@ -13,9 +13,10 @@ class Home extends React.Component {
         this.state = {
             monkey: 'wowowowowow',
             data: null,
-            data2: 'hi',
+            recipe: null,
         };
         this.clickHandler = this.clickHandler.bind(this);
+        this.chooseRecipe = this.chooseRecipe.bind(this);
     }
 
     componentDidMount() {
@@ -38,6 +39,15 @@ class Home extends React.Component {
         }, 100);
     }
 
+    chooseRecipe(id) {
+        console.log('chose me!', id);
+        console.log(this.state.data)
+        
+        let currentRecipe = this.state.data.filter( x => x.id === id);
+        this.setState({recipe: currentRecipe[0]})
+        // console.log(currentRecipe[0]);
+    }
+
     render() {
         // console.log(this.state.data);
         return (
@@ -48,8 +58,10 @@ class Home extends React.Component {
                     <button onClick={this.clickHandler}>Create New Recipe</button>
                 </div>
                 <div className={styles.recipeContainer}>
-                    <Recipes data={this.state.data}/>
-                    <Recipe />
+                    <Recipes 
+                        data={this.state.data} chooseRecipe={this.chooseRecipe}
+                    />
+                    <Recipe recipe={this.state.recipe}/>
                 </div>
             </div>
         );

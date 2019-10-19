@@ -19,7 +19,9 @@ class Recipes extends React.Component {
           return (<div key={i}>
               <p>{r.name}</p>
               <img src={r.img}/>
-
+              <button onClick={()=>{
+                this.props.chooseRecipe(r.id)
+              }}>Choose</button>
             </div>)
       })
     }
