@@ -2,7 +2,7 @@ import React from 'react';
 
 import styles from './style.scss';
 
-class Recipe extends React.Component {
+class Recipes extends React.Component {
   constructor() {
     super();
     this.state = {
@@ -20,4 +20,4 @@ class Recipe extends React.Component {
   }
 }
 
-export default Recipe;
+export default Recipes;
