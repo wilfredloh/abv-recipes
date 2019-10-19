@@ -8,36 +8,49 @@ import { withRouter } from 'react-router-dom';
 
 
 class Index extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      monkey: 'wowowowowow',
-    };
-    this.clickHandler = this.clickHandler.bind(this);
+    constructor() {
+        super();
+        this.state = {
+            monkey: 'wowowowowow',
+            data: null,
+            data2: 'hi',
+        };
+        this.clickHandler = this.clickHandler.bind(this);
+    }
 
-  }
+    componentDidMount() {
+        // console.log('in component')
 
-  clickHandler(){
-    setTimeout(()=>{
-      this.props.history.push('/new');
-    },100);
-}
+        // fetch('http://swapi.co/api/people/1')
+        fetch('http://localhost:3000/test', {
+            headers: {
+                'Content-Type': 'application/json',
+                "Access-Control-Allow-Origin": "*",
+            }})
+            .then(res => res.json())
+            .then(json => this.setState({data: json}))
+            .catch(error => console.log(error))
+    }
 
-  render() {
+    clickHandler() {
+        setTimeout(()=>{
+        this.props.history.push('/new');
+        },100);
+    }
 
-    let arr = this.props.arr.map((el)=> <p>{el}</p>)
-    return (
-        <div>
-            <h1>Index Page</h1>
-            <input value="search"></input>
-            <button onClick={this.clickHandler}>Create New Recipe</button>
-            {arr}
-            <Recipes />
-            {/* <SingleRecipe /> */}
-            Hello
-        </div>
-    );
-  }
+    render() {
+        // console.log(this.state.data);
+        return (
+            <div>
+                <h1>Index Page</h1>
+                <input value="search"></input>
+                <button onClick={this.clickHandler}>Create New Recipe</button>
+                <Recipes data={this.state.data}/>
+                {/* <SingleRecipe /> */}
+                Hello
+            </div>
+        );
+    }
 }
 
 // export default Index;

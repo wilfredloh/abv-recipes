@@ -16,11 +16,7 @@ class App extends React.Component {
     super();
     this.state = {
       message: 'hello',
-      arr: [
-        'recipe1',
-        'refcaa2',
-        'dasdads'
-      ]
+     
     };
 
   }
@@ -42,7 +38,7 @@ class App extends React.Component {
             <Route
               exact path='/'
               render={() => (
-                <Index arr={this.state.arr} />
+                <Index />
               )}
             />
          

@@ -45,11 +45,19 @@ module.exports = (db) => {
       banana: 'oranges',
       kiwi: 'apple'
     };
+    console.log('in TESTTTOMGGGGGGGG $$$$$')
+    console.log('in TESTTTOMGGGGGGGG $$$$$')
+    console.log('in TESTTTOMGGGGGGGG $$$$$')
+    console.log('in TESTTTOMGGGGGGGG $$$$$')
 
     let id = 1;
 
     db.pokemon.get((error, recipe) => {
       // queryResult contains pokemon data returned from the pokemon model
+      console.log('in dDBBBBOMGGGGGGGG $$$$$')
+      console.log('in dDBBBBOMGGGGGGGG $$$$$')
+      console.log('in dDBBBBOMGGGGGGGG $$$$$')
+      console.log('in dDBBBBOMGGGGGGGG $$$$$')
       if (error) {
 
         console.error('error getting recipe', error);
@@ -67,8 +75,8 @@ module.exports = (db) => {
         }else{
           console.log(recipe)
           // render pokemon view in the pokemon folder
-          response.render('pokemon/show', { pokemon: recipe });
-          // response.send('teafadasdasd WORKS!');
+          // response.render('pokemon/show', { pokemon: recipe });
+          response.send(recipe);
 
         }
       }

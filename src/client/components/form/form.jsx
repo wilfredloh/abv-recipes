@@ -30,7 +30,7 @@ class Form extends React.Component {
     } else {
       x -= 1;
     }
-    console.log(this.state)
+    // console.log(this.state)
     this.setState({step: x})
 
   }
