@@ -1,1 +1,0 @@
-INSERT INTO recipes (name, img) VALUES ('chicken rice', 'url here');
