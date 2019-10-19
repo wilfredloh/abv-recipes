@@ -2,6 +2,8 @@ import React from 'react';
 // import styles from './style.scss';
 
 import Recipes from './Recipes/Recipes';
+import { withRouter } from 'react-router-dom';
+
 // import SingleRecipe from './SingleRecipe/SingleRecipe';
 
 
@@ -11,16 +13,24 @@ class Index extends React.Component {
     this.state = {
       monkey: 'wowowowowow',
     };
+    this.clickHandler = this.clickHandler.bind(this);
+
   }
+
+  clickHandler(){
+    setTimeout(()=>{
+      this.props.history.push('/new');
+    },100);
+}
 
   render() {
 
     let arr = this.props.arr.map((el)=> <p>{el}</p>)
     return (
         <div>
-            <h1>abillionveg</h1>
+            <h1>Index Page</h1>
             <input value="search"></input>
-            <button>Create New Recipe</button>
+            <button onClick={this.clickHandler}>Create New Recipe</button>
             {arr}
             <Recipes />
             {/* <SingleRecipe /> */}
@@ -30,4 +40,5 @@ class Index extends React.Component {
   }
 }
 
-export default Index;
+// export default Index;
+export default withRouter(Index);

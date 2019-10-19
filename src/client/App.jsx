@@ -35,9 +35,7 @@ class App extends React.Component {
 
 
           <nav>
-            <h1>React Router</h1>
-            <Link to="/">Index</Link>
-            <Link to="/new">Create</Link>
+            <Link to="/"><h1>abillionveg</h1></Link>
           </nav>
 
           <main>
