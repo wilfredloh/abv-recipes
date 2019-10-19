@@ -14,11 +14,14 @@ class Index extends React.Component {
   }
 
   render() {
+
+    let arr = this.props.arr.map((el)=> <p>{el}</p>)
     return (
         <div>
             <h1>abillionveg</h1>
             <input value="search"></input>
             <button>Create New Recipe</button>
+            {arr}
             <Recipes />
             {/* <SingleRecipe /> */}
             Hello
