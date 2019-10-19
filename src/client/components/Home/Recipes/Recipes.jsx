@@ -25,9 +25,7 @@ class Recipes extends React.Component {
     }
     return (
       <div>
-        <p>{this.state.monkey}</p>
         {recipes}
-        <input className={styles.name} />
       </div>
     );
   }

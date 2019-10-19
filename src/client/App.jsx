@@ -3,7 +3,7 @@ import { hot } from 'react-hot-loader';
 
 import Counter from './components/counter/counter';
 import Form from './components/Form/Form';
-import Index from './components/Index/Index';
+import Home from './components/Home/Home';
 
   // React Router Stuff
 import { BrowserRouter } from "react-router-dom";
@@ -38,7 +38,7 @@ class App extends React.Component {
             <Route
               exact path='/'
               render={() => (
-                <Index />
+                <Home />
               )}
             />
          

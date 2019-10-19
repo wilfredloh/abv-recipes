@@ -1,0 +1,16 @@
+.nav {
+    display: flex;
+    justify-content: space-around;
+
+}
+
+.recipeContainer {
+    display: flex;
+    margin: 1rem;
+    height: 80vh;
+}
+
+.recipeContainer > div {
+    margin: 1rem;
+    overflow: scroll;
+}

@@ -1,13 +1,13 @@
 import React from 'react';
-// import styles from './style.scss';
+import styles from './style.scss';
 
 import Recipes from './Recipes/Recipes';
 import { withRouter } from 'react-router-dom';
 
-// import SingleRecipe from './SingleRecipe/SingleRecipe';
+import Recipe from './Recipe/Recipe';
 
 
-class Index extends React.Component {
+class Home extends React.Component {
     constructor() {
         super();
         this.state = {
@@ -35,23 +35,26 @@ class Index extends React.Component {
     clickHandler() {
         setTimeout(()=>{
         this.props.history.push('/new');
-        },100);
+        }, 100);
     }
 
     render() {
         // console.log(this.state.data);
         return (
             <div>
-                <h1>Index Page</h1>
-                <input value="search"></input>
-                <button onClick={this.clickHandler}>Create New Recipe</button>
-                <Recipes data={this.state.data}/>
-                {/* <SingleRecipe /> */}
-                Hello
+                <div className={styles.nav}>
+                    <h1>Index Page</h1>
+                    <input value="search"></input>
+                    <button onClick={this.clickHandler}>Create New Recipe</button>
+                </div>
+                <div className={styles.recipeContainer}>
+                    <Recipes data={this.state.data}/>
+                    <Recipe />
+                </div>
             </div>
         );
     }
 }
 
 // export default Index;
-export default withRouter(Index);
+export default withRouter(Home);
