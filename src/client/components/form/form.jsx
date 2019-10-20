@@ -1,8 +1,9 @@
 import React from 'react';
-import styles from './style.scss';
 import { withRouter } from 'react-router-dom';
+
 import StepOne from './Steps/Step1';
 import StepTwo from './Steps/Step2';
+import StepThree from './Steps/Step3';
 
 class Form extends React.Component {
   constructor() {
@@ -12,27 +13,28 @@ class Form extends React.Component {
     }
     this.clickHandler = this.clickHandler.bind(this);
     this.handleStep = this.handleStep.bind(this);
-
+    this.createRecipe = this.createRecipe.bind(this);
   }
 
   clickHandler(){
     setTimeout(()=>{
       this.props.history.push('/');
-    },100);
+    }, 100);
   }
 
   handleStep (step) {
-    console.log('in step!')
-    console.log(this.state)
-    let x = this.state.step;
+    let currentStep = this.state.step;
     if (step === 'inc') {
-      x += 1;
+      currentStep += 1;
     } else {
-      x -= 1;
+      currentStep -= 1;
     }
-    // console.log(this.state)
-    this.setState({step: x})
+    this.setState({step: currentStep})
+  }
 
+  createRecipe () {
+    console.log('in create recipe!');
+    this.clickHandler();
   }
 
   render() {
@@ -42,6 +44,11 @@ class Form extends React.Component {
       stepContainer = <StepOne changeStep={this.handleStep}/>
     } else if ( step === 2) {
       stepContainer = <StepTwo changeStep={this.handleStep}/>
+    } else if (step === 3) {
+      stepContainer = <StepThree 
+        changeStep={this.handleStep}
+        createRecipe={this.createRecipe}
+      />
     }
     return (
       <div>
@@ -51,5 +58,4 @@ class Form extends React.Component {
   }
 }
 
-// export default Form;
 export default withRouter(Form);

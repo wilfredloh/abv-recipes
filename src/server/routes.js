@@ -5,5 +5,5 @@ module.exports = (app, db) => {
   app.get('/pokemon/:id', pokemon.get);
 
   app.get('/api/pokemon/:id', pokemon.apiget);
-  app.get('/test', pokemon.testCheck);
+  app.get('/api/recipes', pokemon.testCheck);
 };

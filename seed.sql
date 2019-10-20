@@ -1,4 +1,4 @@
-INSERT INTO recipes (name, img) VALUES ('Spiced Fresh Tomato Soup', 'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/spiced-tomato-soup-sweet-herbed-pitas-ghk-1538685691.jpg?crop=1xw:0.99975xh;center,top&resize=768:*');
+INSERT INTO recipes (name, img) VALUES ('Spiced Fresh Tomato Soup', 'https://hips.hearstapps.com/hmg-prod/images/delish-classic-tomato-soup-seo-01-1539282214.jpg');
 INSERT INTO recipes (name, img) VALUES ('Chicken Rice', 'https://prod.static9.net.au/_/media/2017/05/26/15/55/Pohs-Hainanese-chicken-rice.jpg');
 INSERT INTO recipes (name, img) VALUES ('Char Kway Teow', 'https://tasteasianfood.com/wp-content/uploads/2018/07/Char-Kuey-Teow-3.jpg');
 INSERT INTO recipes (name, img) VALUES ('Cheesecake',  'https://cookiesandcups.com/wp-content/uploads/2017/10/perfectcheesecake-13-1.jpg');

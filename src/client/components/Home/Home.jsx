@@ -1,18 +1,15 @@
 import React from 'react';
+import { withRouter } from 'react-router-dom';
 import styles from './style.scss';
 
-import Recipes from './Recipes/Recipes';
-import { withRouter } from 'react-router-dom';
-
 import Recipe from './Recipe/Recipe';
-
+import Recipes from './Recipes/Recipes';
 
 class Home extends React.Component {
     constructor() {
         super();
         this.state = {
-            monkey: 'wowowowowow',
-            data: null,
+            recipes: null,
             recipe: null,
         };
         this.clickHandler = this.clickHandler.bind(this);
@@ -20,19 +17,13 @@ class Home extends React.Component {
     }
 
     componentDidMount() {
-        // console.log('in component')
-
-        // fetch('http://swapi.co/api/people/1')
-        fetch('http://localhost:3000/test', {
-            headers: {
-                'Content-Type': 'application/json',
-                "Access-Control-Allow-Origin": "*",
-            }})
+        // get all recipes to display on home page
+        fetch('/api/recipes')
             .then(res => res.json())
-            .then(json => this.setState({data: json}))
-            .catch(error => console.log(error))
+            .then(json => this.setState({recipes: json}))
     }
 
+    // show create new recipe page/route
     clickHandler() {
         setTimeout(()=>{
         this.props.history.push('/new');
@@ -41,9 +32,12 @@ class Home extends React.Component {
 
     chooseRecipe(id) {
         console.log('chose me!', id);
-        console.log(this.state.data)
+        console.log(this.state.recipes)
+        // fetch('/test')
+            // .then(res => res.json())
+            // .then(json => this.setState({data: json}))
         
-        let currentRecipe = this.state.data.filter( x => x.id === id);
+        let currentRecipe = this.state.recipes.filter( x => x.id === id);
         this.setState({recipe: currentRecipe[0]})
         // console.log(currentRecipe[0]);
     }
@@ -59,7 +53,8 @@ class Home extends React.Component {
                 </div>
                 <div className={styles.recipeContainer}>
                     <Recipes 
-                        data={this.state.data} chooseRecipe={this.chooseRecipe}
+                        recipes={this.state.recipes} 
+                        chooseRecipe={this.chooseRecipe}
                     />
                     <Recipe recipe={this.state.recipe}/>
                 </div>
@@ -68,5 +63,4 @@ class Home extends React.Component {
     }
 }
 
-// export default Index;
 export default withRouter(Home);

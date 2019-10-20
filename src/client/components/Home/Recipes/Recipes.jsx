@@ -1,30 +1,25 @@
 import React from 'react';
 
-import styles from './style.scss';
-
 class Recipes extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      monkey: 'wowowowowow',
-    };
-  }
 
   render() {
     // console.log('recipes in recipe: ', this.props)
-    let recipes = '';
-    if (this.props.data !== null) {
-      // console.log('in here!!')
-      recipes = this.props.data.map( (r,i) => {
-          return (<div key={i}>
-              <p>{r.name}</p>
-              <img src={r.img}/>
-              <button onClick={()=>{
-                this.props.chooseRecipe(r.id)
-              }}>Choose</button>
-            </div>)
+
+    let recipes = this.props.recipes ? 
+      this.props.recipes.map( (recipe, index) => {
+        return (
+          <div key={index}>
+            <p>{recipe.name}</p>
+            <img src={recipe.img}/>
+            <button onClick={()=>{
+              this.props.chooseRecipe(recipe.id);
+              }}>Choose
+            </button>
+          </div>
+        )
       })
-    }
+      : <h1>No recipes to show!</h1>;
+  
     return (
       <div>
         {recipes}
