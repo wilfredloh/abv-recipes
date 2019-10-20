@@ -41,7 +41,10 @@ class Form extends React.Component {
     let step = this.state.step;
     let stepContainer;
     if ( step === 1 ) {
-      stepContainer = <StepOne changeStep={this.handleStep}/>
+      stepContainer = <StepOne 
+        changeStep={this.handleStep}
+        backToHome={this.clickHandler}
+      />
     } else if ( step === 2) {
       stepContainer = <StepTwo changeStep={this.handleStep}/>
     } else if (step === 3) {

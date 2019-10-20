@@ -1,9 +1,9 @@
 module.exports = (app, db) => {
 
-  const pokemon = require('./controllers/pokemon')(db);
+  const recipes = require('./controllers/recipes')(db);
 
-  app.get('/pokemon/:id', pokemon.get);
-
-  app.get('/api/pokemon/:id', pokemon.apiget);
-  app.get('/api/recipes', pokemon.testCheck);
+  // app.get('/recipes/:id', recipes.get);
+  // app.get('/api/recipes/:id', recipes.apiget);
+  
+  app.get('/api/recipes', recipes.getRecipes);
 };

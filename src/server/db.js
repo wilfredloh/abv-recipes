@@ -1,5 +1,5 @@
 const pg = require('pg');
-const pokemon = require('./models/pokemon');
+const recipes = require('./models/recipes');
 const url = require('url');
 
 var configs;
@@ -38,7 +38,7 @@ module.exports = {
   /*
    * ADD APP MODELS HERE
    */
-  pokemon: pokemon(pool),
+  recipes: recipes(pool),
 
   //make queries directly from here
   queryInterface: (text, params, callback) => {

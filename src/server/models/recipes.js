@@ -5,34 +5,22 @@
  */
 module.exports = (dbPoolInstance) => {
 
-  // `dbPoolInstance` is accessible within this function scope
-
-  let create = (pokemon, callback) => {
+  let create = (recipe, callback) => {
     // set up query
-    const queryString = `INSERT INTO pokemons (name, num, img, weight, height)
-      VALUES ($1, $2, $3, $4, $5) RETURNING *`;
+    const queryString = `INSERT INTO recipes (name, img)
+      VALUES ($1, $2) RETURNING *`;
     const values = [
-      pokemon.name,
-      pokemon.num,
-      pokemon.img,
-      pokemon.weight,
-      pokemon.height
+      recipe.name,
+      recipe.img
     ];
 
     // execute query
     dbPoolInstance.query(queryString, values, (error, queryResult) => {
-      // invoke callback function with results after query has executed
-
       if( error ){
-
         console.log("query error", error)
-
-        // invoke callback function with results after query has executed
         callback(error, null);
 
       }else{
-
-        // invoke callback function with results after query has executed
 
         if( queryResult.rows.length > 0 ){
           callback(null, queryResult.rows[0]);
@@ -45,18 +33,13 @@ module.exports = (dbPoolInstance) => {
     });
   };
 
-  let get = (callback) => {
-    // const values = [id];
+  let getAll = (callback) => {
 
     dbPoolInstance.query('SELECT * from recipes', (error, queryResult) => {
       if( error ){
-
-        // invoke callback function with results after query has executed
         callback(error, null);
 
       }else{
-
-        // invoke callback function with results after query has executed
 
         if( queryResult.rows.length > 0 ){
           callback(null, queryResult.rows);
@@ -72,6 +55,6 @@ module.exports = (dbPoolInstance) => {
 
   return {
     create,
-    get
+    getAll
   };
 };

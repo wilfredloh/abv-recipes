@@ -19,7 +19,11 @@ class StepOne extends React.Component {
                     }}>
                     Choose Ingredients
                 </button>
-                <button onClick={this.clickHandler}>Back</button>
+                <button onClick={()=> {
+                        this.props.backToHome();
+                    }}>
+                    Back
+                </button>
             </div>
         );
     }
