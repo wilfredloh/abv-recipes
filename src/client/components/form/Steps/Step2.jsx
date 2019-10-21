@@ -15,12 +15,12 @@ class StepTwo extends React.Component {
                 <input type="checkbox" name="vehicle1" value="Bike"></input>Ing 3
 
                 <button onClick={ ()=> {
-                    this.props.changeStep('inc')
+                    this.props.changeStep(true)
                     }}>
                     Fill in instructions
                 </button>
                 <button onClick={ ()=> {
-                    this.props.changeStep('dec')
+                    this.props.changeStep(false)
                     }}>
                     Back
                 </button>
