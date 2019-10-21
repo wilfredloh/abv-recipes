@@ -110,9 +110,34 @@ module.exports = (db) => {
     });
   };
 
+  let getInstructions = (request, response) => {
+
+    let recipeID = request.params.id;
+    db.recipes.getInstructions( recipeID, (error, ingredients) => {
+ 
+      if (error) {
+        console.error('error getting ingredients', error);
+        response.status(500);
+        response.send('server error');
+
+      } else {
+        
+        if( ingredients === null ){
+          response.status(404);
+          response.send('not found');
+
+        }else{
+          console.log('got result: ', ingredients);
+          response.send(ingredients);
+        }
+      }
+    });
+  };
+
   return {
     getRecipes,
     getIngredients,
-    getIngredientsFromRecipe
+    getIngredientsFromRecipe,
+    getInstructions,
   }
 };

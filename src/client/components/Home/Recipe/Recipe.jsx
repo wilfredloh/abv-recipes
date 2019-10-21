@@ -1,16 +1,31 @@
 import React from 'react';
 
+
 class Recipe extends React.Component {
 
     render() {
-        console.log('recipe: ', this.props.recipe)
+
+        let ingredients = this.props.ingredients ?  this.props.ingredients.map((ingredient, i)=>{
+            return <p key={i}>{ingredient.name}</p>
+        }) : <p>No ingredients!</p>;
+
+        let instructions = this.props.instructions ? this.props.instructions.map((instruction, i)=>{
+            return <p key={i}>{instruction.description}</p>
+        }) : <p>No instructions!</p>;
+        
         let recipe = this.props.recipe ? 
+            <div>
+                <h2>{this.props.recipe.name}</h2>
+                <img src={this.props.recipe.img}/>
                 <div>
-                    <p>{this.props.recipe.name}</p>
-                    <img src={this.props.recipe.img}/>
-                    <p>Ingredients blalbalfall baflsld blalfasd blav fad as  sdad asd asd asda sdas d </p>
-                    <p>Instructions</p>
+                    <h3>Ingredients</h3>
+                    {ingredients}
                 </div>
+                <div>
+                    <h3>Instructions</h3>
+                    {instructions}
+                </div>
+            </div>
         : <h1>No recipe selected! Click a recipe to see more.</h1>;
 
         return (

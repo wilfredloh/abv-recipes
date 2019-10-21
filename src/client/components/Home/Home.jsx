@@ -11,6 +11,8 @@ class Home extends React.Component {
         this.state = {
             recipes: null,
             recipe: null,
+            recipeIngredients: null,
+            instructions: null,
         };
         this.clickHandler = this.clickHandler.bind(this);
         this.chooseRecipe = this.chooseRecipe.bind(this);
@@ -23,12 +25,6 @@ class Home extends React.Component {
             .then(json => this.setState({recipes: json}))
     }
 
-    // fetch(`/api/recipeIngredients/${id}`)
-    //         .then(res => res.json())
-    //         .then(json => 
-    //             this.setState({ingredients: json})
-    //         );
-
     // show create new recipe page/route
     clickHandler() {
         setTimeout(()=>{
@@ -37,19 +33,32 @@ class Home extends React.Component {
     }
 
     chooseRecipe(id) {
-        console.log('chose me!', id);
-        console.log(this.state.recipes)
-        // fetch('/test')
-            // .then(res => res.json())
-            // .then(json => this.setState({data: json}))
-        
+
+        fetch(`/api/recipeIngredients/${id}`)
+            .then(res => res.json())
+            .then(json => {
+                this.setState({recipeIngredients: json});
+            })
+            .catch(error => {
+                this.setState({recipeIngredients: null});
+                console.error('error', error.message)
+            })
+            
+        fetch(`/api/instructions/${id}`)
+            .then(res => res.json())
+            .then(json => {
+                this.setState({instructions: json});
+            })
+            .catch(error => {
+                this.setState({instructions: null});
+                console.error('error', error.message)
+            })
+
         let currentRecipe = this.state.recipes.filter( x => x.id === id);
         this.setState({recipe: currentRecipe[0]})
-        // console.log(currentRecipe[0]);
     }
 
     render() {
-        // console.log(this.state.data);
         return (
             <div>
                 <div className={styles.nav}>
@@ -62,7 +71,11 @@ class Home extends React.Component {
                         recipes={this.state.recipes} 
                         chooseRecipe={this.chooseRecipe}
                     />
-                    <Recipe recipe={this.state.recipe}/>
+                    <Recipe 
+                        recipe={this.state.recipe}
+                        ingredients={this.state.recipeIngredients}
+                        instructions={this.state.instructions}
+                    />
                 </div>
             </div>
         );
