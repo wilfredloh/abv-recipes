@@ -10,6 +10,7 @@ class StepTwo extends React.Component {
         this.state = {
             ingredients : null,
             searchWord : null,
+            searchType : 'ing'
         }
         this.setWord = this.setWord.bind(this);
     }
@@ -37,6 +38,7 @@ class StepTwo extends React.Component {
                 <Search
                     array = {this.state.ingredients}
                     searchWord = {this.state.searchWord}
+                    searchType = {this.state.searchType}
                 />
                 <button onClick={ ()=> {
                     this.props.changeStep(true)

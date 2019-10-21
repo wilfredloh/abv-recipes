@@ -13,9 +13,11 @@ class Home extends React.Component {
             recipe: null,
             recipeIngredients: null,
             instructions: null,
+            searchWord: null,
         };
         this.clickHandler = this.clickHandler.bind(this);
         this.chooseRecipe = this.chooseRecipe.bind(this);
+        this.setWord = this.setWord.bind(this);
     }
 
     componentDidMount() {
@@ -30,6 +32,11 @@ class Home extends React.Component {
         setTimeout(()=>{
         this.props.history.push('/new');
         }, 100);
+    }
+
+    setWord(event) {
+        let input = event.target.value.toLowerCase();
+        this.setState({searchWord : input});
     }
 
     chooseRecipe(id) {
@@ -63,13 +70,17 @@ class Home extends React.Component {
             <div>
                 <div className={styles.nav}>
                     <h1>Index Page</h1>
-                    <input value="search"></input>
+                    <input 
+                        placeholder="search recipe"
+                        onChange={this.setWord}>
+                    </input>
                     <button onClick={this.clickHandler}>Create New Recipe</button>
                 </div>
                 <div className={styles.recipeContainer}>
                     <Recipes 
                         recipes={this.state.recipes} 
                         chooseRecipe={this.chooseRecipe}
+                        searchWord = {this.state.searchWord}
                     />
                     <Recipe 
                         recipe={this.state.recipe}

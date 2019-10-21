@@ -6,11 +6,11 @@ class Recipe extends React.Component {
     render() {
 
         let ingredients = this.props.ingredients ?  this.props.ingredients.map((ingredient, i)=>{
-            return <p key={i}>{ingredient.name}</p>
+            return <li key={i}>{ingredient.name}</li>
         }) : <p>No ingredients!</p>;
 
         let instructions = this.props.instructions ? this.props.instructions.map((instruction, i)=>{
-            return <p key={i}>{instruction.description}</p>
+            return <p key={i}>{i+1}. {instruction.description}</p>
         }) : <p>No instructions!</p>;
         
         let recipe = this.props.recipe ? 

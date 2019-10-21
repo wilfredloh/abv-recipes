@@ -25,10 +25,9 @@ class StepThree extends React.Component {
         let instructionsArr = this.state.instructions.map((img,i)=>{
             let ref = (input) => { this.nameInput = input }
             return(
-                <div>
+                <div key={i}>
                     <p>Step {i+1}</p>
                     <textarea 
-                        key={i}
                         ref={ref} 
                         onKeyUp={(event)=>{
                             // this.props.saveInput(event.target.value, 'img');

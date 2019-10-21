@@ -26,10 +26,9 @@ class StepOne extends React.Component {
         let imagesArr = this.state.images.map((img,i)=>{
             let ref = (input) => { this.nameInput = input }
             return(
-                <div>
+                <div key={i}>
                     <p>Image {i+1}</p>
                     <input 
-                        key={i}
                         ref={ref} 
                         onChange={(event)=>{
                             this.props.saveInput(event.target.value, 'img');
