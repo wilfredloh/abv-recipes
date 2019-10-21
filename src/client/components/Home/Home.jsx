@@ -36,7 +36,10 @@ class Home extends React.Component {
 
     setWord(event) {
         let input = event.target.value.toLowerCase();
-        this.setState({searchWord : input});
+        this.setState({
+            searchWord : input,
+            recipe : null,
+        });
     }
 
     chooseRecipe(id) {

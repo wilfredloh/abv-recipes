@@ -19,8 +19,8 @@ class Search extends React.Component {
                     mappedArr = filteredArr.map( (ing, i)=> {
                         return (
                             <div key={i}>
-                                <input type="checkbox" name="vehicle1" value="Bike"></input>
-                                <span>{ing.name}</span>
+                                <input type="checkbox" name="name" value={ing.id}></input>
+                                <span>{ing.name} ({ing.amount} {ing.measurement})</span>
                             </div>
                         )
                     })
