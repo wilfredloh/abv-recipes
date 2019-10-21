@@ -29,4 +29,6 @@ INSERT INTO recipe_ingredients (recipe_id, ingredient_id) VALUES (1, 1);
 INSERT INTO recipe_ingredients (recipe_id, ingredient_id) VALUES (1, 2);
 INSERT INTO recipe_ingredients (recipe_id, ingredient_id) VALUES (1, 3);
 INSERT INTO recipe_ingredients (recipe_id, ingredient_id) VALUES (1, 4);
-INSERT INTO recipe_ingredients (recipe_id, ingredient_id) VALUES (1, 5);
+INSERT INTO recipe_ingredients (recipe_id, ingredient_id) VALUES (2, 1);
+INSERT INTO recipe_ingredients (recipe_id, ingredient_id) VALUES (2, 2);
+INSERT INTO recipe_ingredients (recipe_id, ingredient_id) VALUES (2, 5);

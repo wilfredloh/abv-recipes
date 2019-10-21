@@ -33,7 +33,7 @@ module.exports = (dbPoolInstance) => {
     });
   };
 
-  let getAll = (callback) => {
+  let getAllRecipes = (callback) => {
 
     dbPoolInstance.query('SELECT * from recipes', (error, queryResult) => {
       if( error ){
@@ -52,9 +52,51 @@ module.exports = (dbPoolInstance) => {
     });
   };
 
+  let getAllIngredients = (callback) => {
+
+    dbPoolInstance.query('SELECT * from ingredients', (error, queryResult) => {
+      if( error ){
+        callback(error, null);
+
+      }else{
+
+        if( queryResult.rows.length > 0 ){
+          callback(null, queryResult.rows);
+
+        }else{
+          callback(null, null);
+
+        }
+      }
+    });
+  };
+
+  let getIngredientsfromRecipe = (recipeID, callback) => {
+    
+    let queryString = 'select * from ingredients inner join recipe_ingredients on ingredients.id = recipe_ingredients.ingredient_id where recipe_ingredients.recipe_id = $1;'
+    let values = [recipeID]
+    dbPoolInstance.query(queryString, values, (error, queryResult) => {
+      if( error ){
+        callback(error, null);
+
+      }else{
+
+        if( queryResult.rows.length > 0 ){
+          callback(null, queryResult.rows);
+
+        }else{
+          callback(null, null);
+
+        }
+      }
+    });
+  };
+
 
   return {
-    create,
-    getAll
+    // create,
+    getAllRecipes,
+    getAllIngredients,
+    getIngredientsfromRecipe
   };
 };

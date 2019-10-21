@@ -42,7 +42,7 @@ module.exports = (db) => {
 
   let getRecipes = (request, response) => {
 
-    db.recipes.getAll((error, recipes) => {
+    db.recipes.getAllRecipes((error, recipes) => {
  
       if (error) {
         console.error('error getting recipes', error);
@@ -63,7 +63,56 @@ module.exports = (db) => {
     });
   };
 
+  let getIngredients = (request, response) => {
+
+    db.recipes.getAllIngredients((error, recipes) => {
+ 
+      if (error) {
+        console.error('error getting recipes', error);
+        response.status(500);
+        response.send('server error');
+
+      } else {
+        
+        if( recipes === null ){
+          response.status(404);
+          response.send('not found');
+
+        }else{
+          console.log('got result: ', recipes);
+          response.send(recipes);
+        }
+      }
+    });
+  };
+  
+  let getIngredientsFromRecipe = (request, response) => {
+
+    let recipeID = request.params.id;
+    db.recipes.getIngredientsfromRecipe( recipeID, (error, ingredients) => {
+ 
+      if (error) {
+        console.error('error getting ingredients', error);
+        response.status(500);
+        response.send('server error');
+
+      } else {
+        
+        if( ingredients === null ){
+          response.status(404);
+          response.send('not found');
+
+        }else{
+          console.log('got result: ', ingredients);
+          response.send(ingredients);
+        }
+      }
+    });
+  };
+
   return {
-    getRecipes
+    getRecipes,
+    getIngredients,
+    getIngredientsFromRecipe
   }
 };
