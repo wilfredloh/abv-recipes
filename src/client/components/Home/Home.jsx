@@ -23,6 +23,12 @@ class Home extends React.Component {
             .then(json => this.setState({recipes: json}))
     }
 
+    // fetch(`/api/recipeIngredients/${id}`)
+    //         .then(res => res.json())
+    //         .then(json => 
+    //             this.setState({ingredients: json})
+    //         );
+
     // show create new recipe page/route
     clickHandler() {
         setTimeout(()=>{

@@ -13,7 +13,6 @@ class StepOne extends React.Component {
     
     clickHandler(){
         console.log('increase images count!')
-        // this.state.images += 1;
         console.log(this.state.images);
         this.setState({images: [...this.state.images, null]})
         console.log(this.state.images);

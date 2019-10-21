@@ -47,7 +47,6 @@ class StepThree extends React.Component {
                 <h1>#3: Write Instructions</h1>
 
                 <p>Step 1</p>
-                {/* <textarea></textarea> */}
                 {instructionsArr}
                 <p>Press enter to create new image</p>
 
