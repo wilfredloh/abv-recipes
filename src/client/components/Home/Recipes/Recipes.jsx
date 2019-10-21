@@ -1,5 +1,8 @@
 import React from 'react';
 
+import styles from '../style.scss';
+
+
 class Recipes extends React.Component {
 
   render() {
@@ -9,19 +12,22 @@ class Recipes extends React.Component {
       this.props.recipes.map( (recipe, index) => {
         return (
           <div key={index}>
-            <p>{recipe.name}</p>
-            <img src={recipe.img}/>
-            <button onClick={()=>{
-              this.props.chooseRecipe(recipe.id);
-              }}>Choose
-            </button>
+            <h3>{recipe.name}</h3>
+            <img 
+              src={recipe.img}
+              onClick={()=>{
+                this.props.chooseRecipe(recipe.id);
+              }}
+            />
+            {/* <button >Choose
+            </button> */}
           </div>
         )
       })
       : <h1>No recipes to show!</h1>;
   
     return (
-      <div>
+      <div className={styles.recipes}>
         {recipes}
       </div>
     );

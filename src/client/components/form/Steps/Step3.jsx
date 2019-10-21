@@ -12,12 +12,12 @@ class StepThree extends React.Component {
     
       clickHandler(){
         console.log('increase step count!')
-        this.state.instructionSteps += 1;
+        // this.state.instructionSteps += 1;
         console.log(this.state.instructions);
 
         this.setState({instructions: [...this.state.instructions, null]})
         console.log(this.state.instructions);
-        this.nameInput.focus();
+        // this.nameInput.focus();
       }
 
     render() {
@@ -25,20 +25,23 @@ class StepThree extends React.Component {
         let instructionsArr = this.state.instructions.map((img,i)=>{
             let ref = (input) => { this.nameInput = input }
             return(
-                <input 
-                    key={i}
-                    ref={ref} 
-                    onKeyUp={(event)=>{
-                        // this.props.saveInput(event.target.value, 'img');
-                        var key = event.which || event.keyCode;
-                        if (key === 13) { // 13 is enter
-                            if (event.target.value) {
-                                console.log(event.which) 
-                                this.clickHandler(); 
-                            }
-                        }
-                    }}
-                />
+                <div>
+                    <p>Step {i+1}</p>
+                    <textarea 
+                        key={i}
+                        ref={ref} 
+                        onKeyUp={(event)=>{
+                            // this.props.saveInput(event.target.value, 'img');
+                            // var key = event.which || event.keyCode;
+                            // if (key === 13) { // 13 is enter
+                            //     if (event.target.value) {
+                            //         console.log(event.which) 
+                            //         this.clickHandler(); 
+                            //     }
+                            // }
+                        }}
+                    />
+                </div>
             )
         })
 
@@ -46,9 +49,8 @@ class StepThree extends React.Component {
             <div>
                 <h1>#3: Write Instructions</h1>
 
-                <p>Step 1</p>
                 {instructionsArr}
-                <p>Press enter to create new image</p>
+                {/* <p>Press enter to create new image</p> */}
 
                 <button onClick={ ()=> {
                         this.clickHandler();

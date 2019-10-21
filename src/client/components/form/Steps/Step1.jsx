@@ -26,20 +26,23 @@ class StepOne extends React.Component {
         let imagesArr = this.state.images.map((img,i)=>{
             let ref = (input) => { this.nameInput = input }
             return(
-                <input 
-                    key={i}
-                    ref={ref} 
-                    onKeyUp={(event)=>{
-                        this.props.saveInput(event.target.value, 'img');
-                        var key = event.which || event.keyCode;
-                        if (key === 13) { // 13 is enter
-                            if (event.target.value) {
-                                console.log(event.which) 
-                                this.clickHandler(); 
-                            }
-                        }
-                    }}
-                />
+                <div>
+                    <p>Image {i+1}</p>
+                    <input 
+                        key={i}
+                        ref={ref} 
+                        onChange={(event)=>{
+                            this.props.saveInput(event.target.value, 'img');
+                            // var key = event.which || event.keyCode;
+                            // if (key === 13) { // 13 is enter
+                            //     if (event.target.value) {
+                            //         console.log(event.which) 
+                            //         this.clickHandler(); 
+                            //     }
+                            // }
+                        }}
+                    />
+                </div>
             )
         })
 
@@ -54,13 +57,16 @@ class StepOne extends React.Component {
                     }}
                     
                 />
-                <p>Image</p>
                 {imagesArr}
-                <p>Press enter to create new image</p>
-                <input 
+                <button onClick={ ()=> {
+                        this.clickHandler();
+                    }}>
+                    Add image
+                </button>
+                {/* <input 
                     ref={(input) => { this.nameInput = input; }} 
                     defaultValue="will focus"
-                />
+                /> */}
                 <button 
                     onClick={()=> {
                         this.props.changeStep(true);
