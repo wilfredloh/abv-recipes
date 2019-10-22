@@ -12,7 +12,7 @@ class Form extends React.Component {
       currentStep: 1,
       newRecipe: {
         name: null,
-        img: [null],
+        images: [null],
         ingredients: [null],
         instructions: [null]
       }
@@ -20,7 +20,10 @@ class Form extends React.Component {
     this.clickHandler = this.clickHandler.bind(this);
     this.handleStep = this.handleStep.bind(this);
     this.createRecipe = this.createRecipe.bind(this);
-    this.saveInput = this.saveInput.bind(this);
+    this.saveSingleInput = this.saveSingleInput.bind(this);
+    this.saveArrayInput = this.saveArrayInput.bind(this);
+    this.addImagesInput = this.addImagesInput.bind(this);
+    this.deleteImagesInput = this.deleteImagesInput.bind(this);
   }
 
   clickHandler(){
@@ -39,17 +42,37 @@ class Form extends React.Component {
     this.setState({currentStep: currentStep})
   }
 
-  saveInput (input, type) {
-    console.log('before save: ', this.state.newRecipe)
-    console.log('saved input for step: ', this.state.currentStep);
-    console.log(input)
+  saveSingleInput (input, type) {
     this.state.newRecipe[type] = input;
     this.setState({ newRecipe : this.state.newRecipe });
-    console.log('after save: ', this.state.newRecipe)
+  }
+
+  saveArrayInput (index, inputValue) {
+    console.log('this is index: ', index);
+    this.state.newRecipe.images[index] = inputValue;
+    this.setState({ newRecipe : this.state.newRecipe });
+    console.log('this is inputValue: ', inputValue);
+  } 
+
+  addImagesInput () {
+    console.log('this stea? ', this.state.newRecipe.images)
+    this.state.newRecipe.images = [...this.state.newRecipe.images, null];
+    console.log('this stea2? ', this.state.newRecipe.images)
+
+    this.setState(
+      {newRecipe: this.state.newRecipe}
+    )
+  }
+
+  deleteImagesInput (index) {
+    console.log('test works in delete! ', index)
+    console.log(this.state.newRecipe)
+    this.state.newRecipe.images.splice(index, 1);
+    this.setState({ newRecipe : this.state.newRecipe });
+
   }
 
   createRecipe () {
-    console.log('in create recipe!');
     this.clickHandler();
   }
 
@@ -58,9 +81,13 @@ class Form extends React.Component {
     let stepContainer;
     if ( currentStep === 1 ) {
       stepContainer = <StepOne 
+        recipe={this.state.newRecipe}
         changeStep={this.handleStep}
         backToHome={this.clickHandler}
-        saveInput={this.saveInput}
+        saveSingleInput={this.saveSingleInput}
+        saveArrayInput={this.saveArrayInput}
+        addImagesInput={this.addImagesInput}
+        deleteImagesInput={this.deleteImagesInput}
       />
     } else if ( currentStep === 2) {
       stepContainer = <StepTwo changeStep={this.handleStep}/>

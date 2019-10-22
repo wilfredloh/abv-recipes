@@ -12,35 +12,48 @@ class StepOne extends React.Component {
     }
     
     clickHandler(){
-        console.log('increase images count!')
-        console.log(this.state.images);
         this.setState({images: [...this.state.images, null]})
-        console.log(this.state.images);
-        this.nameInput.focus();
+        // this.nameInput.focus();
     }
 
     // componentDidUpdate(){
     //   }
 
     render() {
-        let imagesArr = this.state.images.map((img,i)=>{
+        // console.log('thispropsname, ' , this.props.name)
+        let name = this.props.recipe.name ? this.props.recipe.name : '';
+        let imagesArr = this.props.recipe.images.map((img,i)=>{
+            // let imgVal = img ? img : '';
+
+            let x = img ? img : '';
+            let deleteButton = 
+                <button 
+                    id={i}
+                    onClick={(event)=>{
+                        let el = event.target
+                        this.props.deleteImagesInput(el.id);
+                    }}
+                > x 
+                </button>;
+            if (i === 0) {
+                deleteButton = '';
+            }
             let ref = (input) => { this.nameInput = input }
             return(
                 <div key={i}>
                     <p>Image {i+1}</p>
                     <input 
+                        id={i}
                         ref={ref} 
+                        value={x}
                         onChange={(event)=>{
-                            this.props.saveInput(event.target.value, 'img');
-                            // var key = event.which || event.keyCode;
-                            // if (key === 13) { // 13 is enter
-                            //     if (event.target.value) {
-                            //         console.log(event.which) 
-                            //         this.clickHandler(); 
-                            //     }
-                            // }
+                            let el = event.target;
+                            // this.state.images[el.index] = el.value
+                            this.props.saveArrayInput(el.id, el.value);
+
                         }}
                     />
+                    {deleteButton}
                 </div>
             )
         })
@@ -48,17 +61,16 @@ class StepOne extends React.Component {
         return (
             <div>
                 <h1>#1: Basic details</h1>
-
                 <p>Title</p>
                 <input 
+                    defaultValue={name}
                     onChange={(event)=>{
-                        this.props.saveInput(event.target.value, 'name');
+                        this.props.saveSingleInput(event.target.value, 'name');
                     }}
-                    
                 />
                 {imagesArr}
                 <button onClick={ ()=> {
-                        this.clickHandler();
+                        this.props.addImagesInput();
                     }}>
                     Add image
                 </button>
