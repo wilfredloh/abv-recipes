@@ -18,7 +18,7 @@ class Search extends React.Component {
                 if (searchType === 'ing'){
                     mappedArr = filteredArr.map( (ing, i)=> {
                         return (
-                            <div key={i}>
+                            <div key={ing.id}>
                                 <input type="checkbox" name="name" value={ing.id}></input>
                                 <span>{ing.name} ({ing.amount} {ing.measurement})</span>
                             </div>
@@ -35,8 +35,6 @@ class Search extends React.Component {
                                     this.props.chooseRecipe(recipe.id);
                                 }}
                                 />
-                                {/* <button >Choose
-                                </button> */}
                             </div>
                         )
                     });

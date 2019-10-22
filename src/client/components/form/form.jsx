@@ -22,8 +22,8 @@ class Form extends React.Component {
     this.createRecipe = this.createRecipe.bind(this);
     this.saveSingleInput = this.saveSingleInput.bind(this);
     this.saveArrayInput = this.saveArrayInput.bind(this);
-    this.addImagesInput = this.addImagesInput.bind(this);
-    this.deleteImagesInput = this.deleteImagesInput.bind(this);
+    this.addInputBar = this.addInputBar.bind(this);
+    this.deleteInputBar = this.deleteInputBar.bind(this);
   }
 
   clickHandler(){
@@ -47,56 +47,67 @@ class Form extends React.Component {
     this.setState({ newRecipe : this.state.newRecipe });
   }
 
-  saveArrayInput (index, inputValue) {
-    console.log('this is index: ', index);
-    this.state.newRecipe.images[index] = inputValue;
+  saveArrayInput (index, inputValue, type) {
+    console.log('testtttt in input')
+    this.state.newRecipe[type][index] = inputValue;
     this.setState({ newRecipe : this.state.newRecipe });
-    console.log('this is inputValue: ', inputValue);
   } 
 
-  addImagesInput () {
-    console.log('this stea? ', this.state.newRecipe.images)
-    this.state.newRecipe.images = [...this.state.newRecipe.images, null];
-    console.log('this stea2? ', this.state.newRecipe.images)
-
+  addInputBar (type) {
+    this.state.newRecipe[type] = [...this.state.newRecipe[type], null];
     this.setState(
       {newRecipe: this.state.newRecipe}
     )
   }
 
-  deleteImagesInput (index) {
-    console.log('test works in delete! ', index)
-    console.log(this.state.newRecipe)
-    this.state.newRecipe.images.splice(index, 1);
+  deleteInputBar (index, type) {
+    this.state.newRecipe[type].splice(index, 1);
     this.setState({ newRecipe : this.state.newRecipe });
-
   }
 
   createRecipe () {
-    this.clickHandler();
+    console.log('New Recipe: ', this.state.newRecipe);
+    // this.clickHandler();
   }
 
   render() {
     let currentStep = this.state.currentStep;
     let stepContainer;
-    if ( currentStep === 1 ) {
-      stepContainer = <StepOne 
-        recipe={this.state.newRecipe}
-        changeStep={this.handleStep}
-        backToHome={this.clickHandler}
-        saveSingleInput={this.saveSingleInput}
-        saveArrayInput={this.saveArrayInput}
-        addImagesInput={this.addImagesInput}
-        deleteImagesInput={this.deleteImagesInput}
-      />
-    } else if ( currentStep === 2) {
-      stepContainer = <StepTwo changeStep={this.handleStep}/>
-    } else if (currentStep === 3) {
-      stepContainer = <StepThree 
-        changeStep={this.handleStep}
-        createRecipe={this.createRecipe}
-      />
+
+    switch(currentStep) {
+      case 1:
+        stepContainer = 
+        <StepOne 
+          addInputBar={this.addInputBar}
+          backToHome={this.clickHandler}
+          changeStep={this.handleStep}
+          deleteInputBar={this.deleteInputBar}
+          recipe={this.state.newRecipe}
+          saveArrayInput={this.saveArrayInput}
+          saveSingleInput={this.saveSingleInput}
+        />
+        break;
+        
+      case 2:
+        stepContainer = 
+        <StepTwo 
+          changeStep={this.handleStep}
+        />
+        break;
+
+      case 3:
+        stepContainer = 
+        <StepThree 
+          addInputBar={this.addInputBar}
+          changeStep={this.handleStep}
+          createRecipe={this.createRecipe}
+          deleteInputBar={this.deleteInputBar}
+          recipe={this.state.newRecipe}
+          saveArrayInput={this.saveArrayInput}
+        />
+        break;
     }
+ 
     return (
       <div>
         {stepContainer}

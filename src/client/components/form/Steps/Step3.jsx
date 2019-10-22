@@ -3,43 +3,37 @@ import { withRouter } from 'react-router-dom';
 
 
 class StepThree extends React.Component {
-    constructor() {
-        super();
-        this.state = {
-          instructions: [null],
-        }
-      }
-    
-      clickHandler(){
-        console.log('increase step count!')
-        // this.state.instructionSteps += 1;
-        console.log(this.state.instructions);
-
-        this.setState({instructions: [...this.state.instructions, null]})
-        console.log(this.state.instructions);
-        // this.nameInput.focus();
-      }
 
     render() {
+        let type = 'instructions';
 
-        let instructionsArr = this.state.instructions.map((img,i)=>{
-            let ref = (input) => { this.nameInput = input }
+        let instructionsArr = this.props.recipe.instructions.map((ins,i)=>{
+            let currentValue = ins ? ins : '';
+            let deleteButton = 
+                <button 
+                    id={i}
+                    onClick={(event)=>{
+                        let el = event.target
+                        this.props.deleteInputBar(el.id, type);
+                    }}
+                > x 
+                </button>;
+            if (i === 0) {
+                deleteButton = '';
+            }
+            
             return(
                 <div key={i}>
                     <p>Step {i+1}</p>
                     <textarea 
-                        ref={ref} 
-                        onKeyUp={(event)=>{
-                            // this.props.saveInput(event.target.value, 'img');
-                            // var key = event.which || event.keyCode;
-                            // if (key === 13) { // 13 is enter
-                            //     if (event.target.value) {
-                            //         console.log(event.which) 
-                            //         this.clickHandler(); 
-                            //     }
-                            // }
+                        id={i}
+                        value={currentValue}
+                        onChange={(event)=>{
+                            let el = event.target;
+                            this.props.saveArrayInput(el.id, el.value, type);
                         }}
                     />
+                    {deleteButton}
                 </div>
             )
         })
@@ -49,10 +43,9 @@ class StepThree extends React.Component {
                 <h1>#3: Write Instructions</h1>
 
                 {instructionsArr}
-                {/* <p>Press enter to create new image</p> */}
 
                 <button onClick={ ()=> {
-                        this.clickHandler();
+                        this.props.addInputBar(type);
                     }}>
                     Add step
                 </button>
