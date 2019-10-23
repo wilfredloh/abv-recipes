@@ -12,6 +12,12 @@ INSERT INTO images (url, recipe_id) VALUES ('https://tasteasianfood.com/wp-conte
 INSERT INTO images (url, recipe_id) VALUES ('https://cookiesandcups.com/wp-content/uploads/2017/10/perfectcheesecake-13-1.jpg', 4);
 INSERT INTO images (url, recipe_id) VALUES ('https://food.fnr.sndimg.com/content/dam/images/food/fullset/2012/11/2/0/DV1510H_fried-chicken-recipe-10_s4x3.jpg.rend.hgtvcom.826.620.suffix/1568222255998.jpeg', 5);
 INSERT INTO images (url, recipe_id) VALUES ('https://cdn.shopify.com/s/files/1/1305/4751/products/StaySteady_Maple_Pecan_Life_26708371-ecea-4ea9-bd54-3feb5cdf2caf_2000x.png?v=1554409757', 6);
+INSERT INTO images (url, recipe_id) VALUES ('https://smppharmacy.com/wp-content/uploads/2019/02/food-post-1024x545.jpg', 1);
+INSERT INTO images (url, recipe_id) VALUES ('https://sethlui.com/wp-content/uploads/2013/10/singapore-food-05058016.jpg', 2);
+INSERT INTO images (url, recipe_id) VALUES ('https://thenypost.files.wordpress.com/2019/09/junk-food-turns-kid-blind.jpg?quality=90&strip=all&w=618&h=410&crop=1', 3);
+INSERT INTO images (url, recipe_id) VALUES ('https://thenypost.files.wordpress.com/2019/09/junk-food-turns-kid-blind.jpg?quality=90&strip=all&w=618&h=410&crop=1', 4);
+INSERT INTO images (url, recipe_id) VALUES ('https://thenypost.files.wordpress.com/2019/09/junk-food-turns-kid-blind.jpg?quality=90&strip=all&w=618&h=410&crop=1', 5);
+INSERT INTO images (url, recipe_id) VALUES ('https://thenypost.files.wordpress.com/2019/09/junk-food-turns-kid-blind.jpg?quality=90&strip=all&w=618&h=410&crop=1', 6);
 
 
 INSERT INTO instructions (description, recipe_id) VALUES ('Make soup: Heat large Dutch oven on medium-low. Add olive oil, then onion, red pepper, and salt, and cook, covered, stirring occasionally, until tender, 8 to 10 minutes.', 1);

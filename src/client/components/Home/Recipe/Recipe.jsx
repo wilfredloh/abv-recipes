@@ -26,6 +26,9 @@ class Recipe extends React.Component {
         let container = '';
         let dryIngredients = '';
         let wetIngredients = '';
+        let images = this.props.selectedImages ? this.props.selectedImages.map((images, i)=>{
+            return <img key={i} src={images.url}/>
+        }) : <p>No images!</p>;
         
         if (this.state.groupable) {
             dryIngredients = this.props.ingredients ?  this.props.ingredients.map((ingredient, i)=>{
@@ -75,6 +78,7 @@ class Recipe extends React.Component {
             <div>
                 <h2>{this.props.recipe.name}</h2>
                 <img src={this.props.recipe.img}/>
+                {images}
                 <div>
                     <h3>Ingredients</h3>
                     <input type="checkbox" name="name" value='test' onClick={this.toggleInput}></input> <span>Groupable</span>
