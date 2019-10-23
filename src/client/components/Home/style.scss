@@ -1,20 +1,46 @@
 .nav {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
+    margin: 0 2rem;
 
 }
 
 .recipeContainer {
     display: flex;
-    margin: 1rem;
+    margin: 0.5rem;
     height: 80vh;
 }
 
 .recipeContainer > div {
     margin: 1rem;
-    overflow: scroll;
+    overflow-x: scroll;
+    background-color: #F8F8F8;
+    border-radius: 0.5rem;
+}
+
+
+
+.recipes {
+    display: flex;
+    flex-flow: row wrap;
+    background-color: green;
+    text-align: center;
+    padding: 1.5rem;
+}
+
+.recipes > div,{
+    margin: 0 auto;
 }
 
 .recipes img:hover{
     cursor: pointer;
+    opacity: 0.8;
+}
+
+.recipe {
+    padding: 1.5rem;
+}
+
+.recipe div {
+    margin: 0 auto;
 }

@@ -90,12 +90,12 @@ class Home extends React.Component {
         return (
             <div>
                 <div className={styles.nav}>
-                    <h1>Index Page</h1>
                     <input 
-                        placeholder="search recipe"
+                        className={"form-control col-md-4"}
+                        placeholder="Find a recipe"
                         onChange={this.setWord}>
                     </input>
-                    <button onClick={this.clickHandler}>Create New Recipe</button>
+                    <button className={"btn btn-warning"}onClick={this.clickHandler}>Create New Recipe</button>
                 </div>
                 <div className={styles.recipeContainer}>
                     <Recipes 

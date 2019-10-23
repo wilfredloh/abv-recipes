@@ -1,4 +1,5 @@
 import React from 'react';
+import styles from '../style.scss'
 
 
 class Recipe extends React.Component {
@@ -76,10 +77,14 @@ class Recipe extends React.Component {
                     {instructions}
                 </div>
             </div>
-        : <h1>No recipe selected! Click a recipe to see more.</h1>;
+        : 
+        <div>
+            <img src="https://media.tenor.com/images/db6a6137bb717491813f56eb7900d617/tenor.gif"/>
+            <p>Click on a recipe to view more</p>
+        </div>;
 
         return (
-            <div>
+            <div className={`col-6 ${styles.recipe}`}>
                 {recipe}
             </div>
         );

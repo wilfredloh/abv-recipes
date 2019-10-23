@@ -10,8 +10,9 @@ class Search extends React.Component {
         let filteredArr = ''
         let mappedArr = ''
         
+        // console.log("arrayToFilter: ", arrayToFilter);
         if (arrayToFilter) {
-            filteredArr = this.props.searchWord ? arrayToFilter.filter(x => x.name.toLowerCase().includes(this.props.searchWord)) 
+            filteredArr = this.props.searchWord ? arrayToFilter.filter(r => r.name.toLowerCase().includes(this.props.searchWord)) 
             : arrayToFilter;
 
             if (filteredArr.length === 0) {

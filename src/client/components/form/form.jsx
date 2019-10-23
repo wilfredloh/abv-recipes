@@ -25,6 +25,7 @@ class Form extends React.Component {
     this.addInputBar = this.addInputBar.bind(this);
     this.deleteInputBar = this.deleteInputBar.bind(this);
     this.toggleCheck = this.toggleCheck.bind(this);
+    this.redirectRoute = this.redirectRoute.bind(this);
   }
 
   componentDidMount() {
@@ -78,6 +79,12 @@ class Form extends React.Component {
     this.setState({ newRecipe : this.state.newRecipe });
   }
 
+  redirectRoute() {
+    setTimeout(()=>{
+      this.props.history.push('/');
+    }, 500);
+  }
+
   createRecipe () {
     let ingredients = this.state.newRecipe.ingredients.filter((ing)=> ing.checked);
     this.state.newRecipe.ingredients = ingredients;
@@ -93,9 +100,7 @@ class Form extends React.Component {
       }
     })
     .then(res => {
-      setTimeout(()=>{
-        this.props.history.push('/');
-      }, 500);
+      this.redirectRoute();
     })
     .catch(error => console.error('Error: ', error))
   }

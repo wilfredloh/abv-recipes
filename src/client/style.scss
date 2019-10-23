@@ -5,10 +5,12 @@ html, body {
 }
 body{
   padding:20px;
-  background-color: brown;
 }
 
 img {
-  width: 10rem;
-  height: auto;
+  width: 15rem;
+  height: 15rem;
+  border-radius: 0.25rem;
+  object-fit: cover;
+  margin: 0.25rem;
 }

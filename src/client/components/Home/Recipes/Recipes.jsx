@@ -29,9 +29,9 @@ class Recipes extends React.Component {
     //     )
     //   })
     //   : <h1>No recipes to show!</h1>;
-  
+
     return (
-      <div className={styles.recipes}>
+      <div className={`col-5 ${styles.recipes}`} >
         {/* {recipes} */}
         <Search
             array = {this.props.recipes}
