@@ -3,9 +3,6 @@ import React from 'react';
 class Search extends React.Component {
 
     render() {
-        // console.log('testtttttototiotoitiotiotiotiitoti')
-        // console.log(this.props.toggleCheck)
-        
         let arrayToFilter = this.props.array;
         let searchType = this.props.searchType;
         let filteredArr = ''

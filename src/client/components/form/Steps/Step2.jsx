@@ -8,25 +8,10 @@ class StepTwo extends React.Component {
     constructor() {
         super();
         this.state = {
-            // ingredients : null,
-            // checkedArray : null,
             searchWord : null,
             searchType : 'ing'
         }
         this.setWord = this.setWord.bind(this);
-        // this.toggleCheck = this.toggleCheck.bind(this);
-    }
-    componentDidMount() {
-        // get all ingredients for user to choose
-        fetch(`/api/ingredients/`)
-            .then(res => res.json())
-            .then(json => {
-                let mappedIng = json.map((ing)=>{
-                    ing.checked = false;
-                    return ing;
-                })
-                this.setState({ ingredients: mappedIng })
-            });
     }
 
     setWord(event) {

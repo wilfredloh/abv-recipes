@@ -17,7 +17,6 @@ class Form extends React.Component {
         instructions: [null],
       }
     }
-    this.redirectRoute = this.redirectRoute.bind(this);
     this.handleStep = this.handleStep.bind(this);
     this.createRecipe = this.createRecipe.bind(this);
     this.saveSingleInput = this.saveSingleInput.bind(this);
@@ -39,12 +38,6 @@ class Form extends React.Component {
             this.state.newRecipe.ingredients = mappedIng;
             this.setState({ newRecipe : this.state.newRecipe })
         });
-  }
-
-  redirectRoute(){
-    setTimeout(()=>{
-      this.props.history.push('/');
-    }, 100);
   }
 
   toggleCheck (id) {
@@ -89,12 +82,8 @@ class Form extends React.Component {
     this.state.newRecipe.ingredients = ingredients;
 
     let data = this.state.newRecipe;
-    let url = `/recipes`
+    let url = `/recipes`;
 
-    console.log('recipe created!')
-    console.log(data)
-    console.log(url)
-    
     fetch(url, {
       method: 'POST',
       body: JSON.stringify(data),
@@ -103,8 +92,9 @@ class Form extends React.Component {
       }
     })
     .then(res => {
-      console.log('success!')
-      this.redirectRoute();
+      setTimeout(()=>{
+        this.props.history.push('/');
+      }, 500);
     })
     .catch(error => console.error('Error: ', error))
   }
