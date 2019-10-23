@@ -9,10 +9,12 @@ class Home extends React.Component {
     constructor() {
         super();
         this.state = {
+            images: null,
+            selectedImages: null,
+            instructions: null,
             recipes: null,
             recipe: null,
             recipeIngredients: null,
-            instructions: null,
             searchWord: null,
         };
         this.clickHandler = this.clickHandler.bind(this);
@@ -25,6 +27,12 @@ class Home extends React.Component {
         fetch('/api/recipes')
             .then(res => res.json())
             .then(json => this.setState({recipes: json}))
+            .catch(error => console.error('error', error))
+
+        fetch('/api/images')
+            .then(res => res.json())
+            .then(json => this.setState({images: json}))
+            .catch(error => console.error('error', error))
     }
 
     // show create new recipe page/route
@@ -84,13 +92,16 @@ class Home extends React.Component {
                         recipes={this.state.recipes} 
                         chooseRecipe={this.chooseRecipe}
                         searchWord = {this.state.searchWord}
+                        images = {this.state.images}
                     />
                     <Recipe 
                         recipe={this.state.recipe}
                         ingredients={this.state.recipeIngredients}
                         instructions={this.state.instructions}
+                        selectedImages={this.state.selectedImages}
                     />
                 </div>
+                
             </div>
         );
     }

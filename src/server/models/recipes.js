@@ -5,51 +5,105 @@
  */
 module.exports = (dbPoolInstance) => {
 
-  let createRecipe = async function (recipe, callback) {
-    // set up query
+  let saveRecipe = async function (recipe, callback) {
 
     try {
-      const queryString = `INSERT INTO recipes (name, img)
-      VALUES ($1, $2) RETURNING *`;
-      const values = [
-        recipe.name,
-        recipe.images[0]
-      ];
-
+      const queryString = `INSERT INTO recipes (name) VALUES ($1) RETURNING *`;
+      const values = [ recipe.name ];
 
       let queryResult = await dbPoolInstance.query(queryString, values);
 
       if (queryResult.rows.length > 0 ){
-        return queryResult;
+        console.log('result: ', queryResult);
+        return queryResult.rows[0].id;
       } else {
         return Promise.reject(new Error('querry is null'));
       }
     } catch (error) {
-      console.log('error in model in catch')
+      console.log('error in model SAVE RECIPE', error)
     }
-    
-    // execute query
-    // dbPoolInstance.query(queryString, values, (error, queryResult) => {
-    //   if( error ){
-    //     console.log("query error", error)
-    //     callback(error, null);
+  };
 
-    //   }else{
+  let saveImages = async function (recipeID, url, callback) {
 
-    //     if( queryResult.rows.length > 0 ){
-    //       callback(null, queryResult.rows[0]);
+    try {
+      const queryString = `INSERT INTO images (recipe_id, url) VALUES ($1, $2) RETURNING *`;
+      const values = [ recipeID, url ];
 
-    //     }else{
-    //       callback(null, null);
+      let queryResult = await dbPoolInstance.query(queryString, values);
 
-    //     }
-    //   }
-    // });
+      if (queryResult.rows.length > 0 ){
+        console.log('result: ', queryResult);
+        return queryResult.rows;
+      } else {
+        return Promise.reject(new Error('querry is null'));
+      }
+    } catch (error) {
+      console.log('error in model in saveImages', error)
+    }
+  };
+
+  let saveIngredients = async function (recipeID, ingredientID, callback) {
+
+    try {
+      const queryString = `INSERT INTO recipe_ingredients (recipe_id, ingredient_id) VALUES ($1, $2) RETURNING *`;
+      const values = [ recipeID, ingredientID ];
+
+      let queryResult = await dbPoolInstance.query(queryString, values);
+
+      if (queryResult.rows.length > 0 ){
+        console.log('result: ', queryResult);
+        return queryResult.rows;
+      } else {
+        return Promise.reject(new Error('querry is null'));
+      }
+    } catch (error) {
+      console.log('error in model in saveIngredients', error)
+    }
+  };
+
+  let saveInstructions = async function (recipeID, description, callback) {
+
+    try {
+      const queryString = `INSERT INTO instructions (description, recipe_id) VALUES ($1, $2) RETURNING *`;
+      const values = [ description, recipeID ];
+
+      let queryResult = await dbPoolInstance.query(queryString, values);
+
+      if (queryResult.rows.length > 0 ){
+        console.log('result: ', queryResult);
+        return queryResult.rows;
+      } else {
+        return Promise.reject(new Error('querry is null'));
+      }
+    } catch (error) {
+      console.log('error in model in saveInstructions', error)
+    }
   };
 
   let getAllRecipes = (callback) => {
 
     dbPoolInstance.query('SELECT * from recipes', (error, queryResult) => {
+      if( error ){
+        callback(error, null);
+
+      }else{
+
+        if( queryResult.rows.length > 0 ){
+          callback(null, queryResult.rows);
+
+        }else{
+          callback(null, null);
+
+        }
+      }
+    });
+  };
+
+  let getImages = (recipeID, callback) => {
+    
+    let queryString = 'select * from images';
+    dbPoolInstance.query(queryString, (error, queryResult) => {
       if( error ){
         callback(error, null);
 
@@ -126,13 +180,19 @@ module.exports = (dbPoolInstance) => {
       }
     });
   };
+  
+  
 
   return {
     // create,
     getAllRecipes,
+    getImages,
     getAllIngredients,
     getIngredientsfromRecipe,
     getInstructions,
-    createRecipe,
+    saveRecipe,
+    saveImages,
+    saveIngredients,
+    saveInstructions,
   };
 };

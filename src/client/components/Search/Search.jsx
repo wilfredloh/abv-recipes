@@ -46,7 +46,9 @@ class Search extends React.Component {
                         )
                     })
                 } else if (searchType === 'recipes') {
+                    // console.log(filteredArr)
                     mappedArr = filteredArr.map( (recipe, i) => {
+                        console.log('recipe img url: ', recipe)
                         return (
                             <div key={i}>
                                 <h3>{recipe.name}</h3>
@@ -58,10 +60,12 @@ class Search extends React.Component {
                                 />
                             </div>
                         )
-                    });
+                    })
                 }
             }
-        } 
+        } else {
+            mappedArr = <h2>No recipes!</h2>
+        }
     
         return (
             <React.Fragment>

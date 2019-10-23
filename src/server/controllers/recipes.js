@@ -23,6 +23,29 @@ module.exports = (db) => {
     });
   };
 
+  let getImages = (request, response) => {
+
+    db.recipes.getImages((error, images) => {
+ 
+      if (error) {
+        console.error('error getting images', error);
+        response.status(500);
+        response.send('server error');
+
+      } else {
+        
+        if( images === null ){
+          response.status(404);
+          response.send('not found');
+
+        }else{
+          // console.log('got result: ', images);
+          response.send(images);
+        }
+      }
+    });
+  };
+
   let getIngredients = (request, response) => {
 
     db.recipes.getAllIngredients((error, recipes) => {
@@ -99,16 +122,28 @@ module.exports = (db) => {
     console.log(request.body)
     console.log('@@@@@@@@@@@@@@@@@@@@@')
 
-
     try{
-      let newRecipe = request.body;
-      let x = await db.recipes.createRecipe( newRecipe );
-      response.send(x);
+      let recipe = request.body;
+      let ingredients = recipe.ingredients;
+      let images = recipe.images;
+      let instructions = recipe.instructions;
+
+      let recipeID = await db.recipes.saveRecipe( recipe );
+
+      for(let i = 0; i< images.length ; i++) {
+        let doneImg = await db.recipes.saveImages( recipeID, images[i]);
+      }
+      for(let i = 0; i< ingredients.length ; i++) {
+        let doneIngr = await db.recipes.saveIngredients( recipeID, ingredients[i].id);
+      }
+      for(let i = 0; i< instructions.length ; i++) {
+        let doneInstr = await db.recipes.saveInstructions( recipeID, instructions[i]);
+      }
+      response.send('OK');
     } catch (error) {
-      console.log('error in controller');
+      console.log('error in controller', error);
     }
     
-
     // db.recipes.createRecipe( newRecipe, (error, recipe) => {
 
     //   if (error) {
@@ -132,6 +167,7 @@ module.exports = (db) => {
 
   return {
     getRecipes,
+    getImages,
     getIngredients,
     getIngredientsFromRecipe,
     getInstructions,
