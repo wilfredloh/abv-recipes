@@ -3,6 +3,8 @@ import React from 'react';
 class Search extends React.Component {
 
     render() {
+        let images = this.props.images ? this.props.images : null;
+
         let arrayToFilter = this.props.array;
         let searchType = this.props.searchType;
         let filteredArr = ''
@@ -46,14 +48,22 @@ class Search extends React.Component {
                         )
                     })
                 } else if (searchType === 'recipes') {
-                    // console.log(filteredArr)
                     mappedArr = filteredArr.map( (recipe, i) => {
-                        console.log('recipe img url: ', recipe)
+                        let src = [];
+
+                        if (recipe !== null && images !== null) {
+                            for (let i = 0; i < images.length; i++) {
+                                if (recipe.id === images[i].recipe_id) {
+                                    src.push(images[i].url);
+                                }
+                            }
+                        }
+                        
                         return (
                             <div key={i}>
                                 <h3>{recipe.name}</h3>
                                 <img 
-                                src={recipe.img}
+                                src={src[0]}
                                 onClick={()=>{
                                     this.props.chooseRecipe(recipe.id);
                                 }}

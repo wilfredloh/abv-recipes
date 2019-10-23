@@ -25,7 +25,32 @@ module.exports = (db) => {
 
   let getImages = (request, response) => {
 
-    db.recipes.getImages((error, images) => {
+    db.recipes.getAllImages((error, images) => {
+ 
+      if (error) {
+        console.error('error getting images', error);
+        response.status(500);
+        response.send('server error');
+
+      } else {
+        
+        if( images === null ){
+          response.status(404);
+          response.send('not found');
+
+        }else{
+          // console.log('got result: ', images);
+          response.send(images);
+        }
+      }
+    });
+  };
+
+  let getImagesFromRecipe = (request, response) => {
+
+    let recipeID = request.params.id;
+
+    db.recipes.getImagesfromRecipe( recipeID, (error, images) => {
  
       if (error) {
         console.error('error getting images', error);
@@ -168,6 +193,7 @@ module.exports = (db) => {
   return {
     getRecipes,
     getImages,
+    getImagesFromRecipe,
     getIngredients,
     getIngredientsFromRecipe,
     getInstructions,

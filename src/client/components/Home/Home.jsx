@@ -61,6 +61,16 @@ class Home extends React.Component {
                 this.setState({recipeIngredients: null});
                 console.error('error', error.message)
             })
+
+        fetch(`/api/images/${id}`)
+            .then(res => res.json())
+            .then(json => {
+                this.setState({selectedImages: json});
+            })
+            .catch(error => {
+                this.setState({selectedImages: null});
+                console.error('error', error.message)
+            })
             
         fetch(`/api/instructions/${id}`)
             .then(res => res.json())
@@ -92,7 +102,8 @@ class Home extends React.Component {
                         recipes={this.state.recipes} 
                         chooseRecipe={this.chooseRecipe}
                         searchWord = {this.state.searchWord}
-                        images = {this.state.images}
+                        images={this.state.images}
+
                     />
                     <Recipe 
                         recipe={this.state.recipe}

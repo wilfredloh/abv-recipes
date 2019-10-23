@@ -100,10 +100,30 @@ module.exports = (dbPoolInstance) => {
     });
   };
 
-  let getImages = (recipeID, callback) => {
+  let getAllImages = (callback) => {
+
+    dbPoolInstance.query('SELECT * from images', (error, queryResult) => {
+      if( error ){
+        callback(error, null);
+
+      }else{
+
+        if( queryResult.rows.length > 0 ){
+          callback(null, queryResult.rows);
+
+        }else{
+          callback(null, null);
+
+        }
+      }
+    });
+  };
+
+  let getImagesfromRecipe = (recipeID, callback) => {
     
-    let queryString = 'select * from images';
-    dbPoolInstance.query(queryString, (error, queryResult) => {
+    let queryString = 'select * from images where recipe_id = $1;'
+    let values = [recipeID]
+    dbPoolInstance.query(queryString, values, (error, queryResult) => {
       if( error ){
         callback(error, null);
 
@@ -186,7 +206,8 @@ module.exports = (dbPoolInstance) => {
   return {
     // create,
     getAllRecipes,
-    getImages,
+    getAllImages,
+    getImagesfromRecipe,
     getAllIngredients,
     getIngredientsfromRecipe,
     getInstructions,

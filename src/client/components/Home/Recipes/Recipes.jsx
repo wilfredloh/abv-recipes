@@ -38,6 +38,7 @@ class Recipes extends React.Component {
             searchWord = {this.props.searchWord}
             searchType={this.state.searchType}
             chooseRecipe={this.props.chooseRecipe}
+            images={this.props.images}
         />
       </div>
     );
