@@ -3,6 +3,9 @@ import React from 'react';
 class Search extends React.Component {
 
     render() {
+        // console.log('testtttttototiotoitiotiotiotiitoti')
+        // console.log(this.props.toggleCheck)
+        
         let arrayToFilter = this.props.array;
         let searchType = this.props.searchType;
         let filteredArr = ''
@@ -17,17 +20,38 @@ class Search extends React.Component {
             } else {
                 if (searchType === 'ing'){
                     mappedArr = filteredArr.map( (ing, i)=> {
+                        let input = ing.checked ? 
+                        <input 
+                            checked
+                            id={i}
+                            type="checkbox" name="name" 
+                            value={ing.id}
+                            onClick={(event)=>{
+                                let el = event.target;
+                                this.props.toggleCheck(el.value, el.id);
+                            }}
+                        ></input> : 
+                        <input 
+                            id={i}
+                            type="checkbox" name="name" 
+                            value={ing.id}
+                            onClick={(event)=>{
+                                let el = event.target;
+                                this.props.toggleCheck(el.value, el.id);
+                            }}
+                        ></input>
+
                         return (
                             <div key={ing.id}>
-                                <input type="checkbox" name="name" value={ing.id}></input>
+                                {input}
                                 <span>{ing.name} ({ing.amount} {ing.measurement})</span>
                             </div>
                         )
                     })
                 } else if (searchType === 'recipes') {
-                    mappedArr = filteredArr.map( (recipe, index) => {
+                    mappedArr = filteredArr.map( (recipe, i) => {
                         return (
-                            <div key={index}>
+                            <div key={i}>
                                 <h3>{recipe.name}</h3>
                                 <img 
                                 src={recipe.img}

@@ -1,45 +1,5 @@
 module.exports = (db) => {
 
-  let apiget = (request, response) => {
-    const stuff = {
-      banana: 'oranges',
-      kiwi: 'apple'
-    };
-
-    response.send(stuff);
-  };
-
-  let get = (request, response) => {
-
-      // use pokemon model method `get` to retrieve pokemon data
-      console.log( db )
-
-      db.pokemon.get(request.params.id, (error, pokemon) => {
-        // queryResult contains pokemon data returned from the pokemon model
-        if (error) {
-
-          console.error('error getting pokemon', error);
-          response.status(500);
-          response.send('server error');
-
-        } else {
-
-          if( pokemon === null ){
-
-            // render pokemon view in the pokemon folder
-            response.status(404);
-            response.send('not found');
-
-          }else{
-
-            // render pokemon view in the pokemon folder
-            response.render('pokemon/show', { pokemon: pokemon });
-
-          }
-        }
-      });
-  };
-
   let getRecipes = (request, response) => {
 
     db.recipes.getAllRecipes((error, recipes) => {
@@ -56,7 +16,7 @@ module.exports = (db) => {
           response.send('not found');
 
         }else{
-          console.log('got result: ', recipes);
+          // console.log('got result: ', recipes);
           response.send(recipes);
         }
       }
@@ -79,7 +39,7 @@ module.exports = (db) => {
           response.send('not found');
 
         }else{
-          console.log('got result: ', recipes);
+          // console.log('got result: ', recipes);
           response.send(recipes);
         }
       }
@@ -103,7 +63,7 @@ module.exports = (db) => {
           response.send('not found');
 
         }else{
-          console.log('got result: ', ingredients);
+          // console.log('got result: ', ingredients);
           response.send(ingredients);
         }
       }
@@ -127,11 +87,47 @@ module.exports = (db) => {
           response.send('not found');
 
         }else{
-          console.log('got result: ', ingredients);
+          // console.log('got result: ', ingredients);
           response.send(ingredients);
         }
       }
     });
+  };
+
+  let createRecipe = async function (request, response) {
+    console.log('@@@@@@@@@@@@@@@@@@@@@$$$####')
+    console.log(request.body)
+    console.log('@@@@@@@@@@@@@@@@@@@@@')
+
+
+    try{
+      let newRecipe = request.body;
+      let x = await db.recipes.createRecipe( newRecipe );
+      response.send(x);
+    } catch (error) {
+      console.log('error in controller');
+    }
+    
+
+    // db.recipes.createRecipe( newRecipe, (error, recipe) => {
+
+    //   if (error) {
+    //     console.error('error getting recipe', error);
+    //     response.status(500);
+    //     response.send('server error');
+
+    //   } else {
+        
+    //     if( recipe === null ){
+    //       response.status(404);
+    //       response.send('not found');
+
+    //     }else{
+    //       console.log('got result: ', recipe);
+    //       response.send('ok!');
+    //     }
+    //   }
+    // });
   };
 
   return {
@@ -139,5 +135,6 @@ module.exports = (db) => {
     getIngredients,
     getIngredientsFromRecipe,
     getInstructions,
+    createRecipe,
   }
 };

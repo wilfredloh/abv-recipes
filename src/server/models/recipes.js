@@ -5,32 +5,46 @@
  */
 module.exports = (dbPoolInstance) => {
 
-  let create = (recipe, callback) => {
+  let createRecipe = async function (recipe, callback) {
     // set up query
-    const queryString = `INSERT INTO recipes (name, img)
+
+    try {
+      const queryString = `INSERT INTO recipes (name, img)
       VALUES ($1, $2) RETURNING *`;
-    const values = [
-      recipe.name,
-      recipe.img
-    ];
+      const values = [
+        recipe.name,
+        recipe.images[0]
+      ];
 
-    // execute query
-    dbPoolInstance.query(queryString, values, (error, queryResult) => {
-      if( error ){
-        console.log("query error", error)
-        callback(error, null);
 
-      }else{
+      let queryResult = await dbPoolInstance.query(queryString, values);
 
-        if( queryResult.rows.length > 0 ){
-          callback(null, queryResult.rows[0]);
-
-        }else{
-          callback(null, null);
-
-        }
+      if (queryResult.rows.length > 0 ){
+        return queryResult;
+      } else {
+        return Promise.reject(new Error('querry is null'));
       }
-    });
+    } catch (error) {
+      console.log('error in model in catch')
+    }
+    
+    // execute query
+    // dbPoolInstance.query(queryString, values, (error, queryResult) => {
+    //   if( error ){
+    //     console.log("query error", error)
+    //     callback(error, null);
+
+    //   }else{
+
+    //     if( queryResult.rows.length > 0 ){
+    //       callback(null, queryResult.rows[0]);
+
+    //     }else{
+    //       callback(null, null);
+
+    //     }
+    //   }
+    // });
   };
 
   let getAllRecipes = (callback) => {
@@ -119,5 +133,6 @@ module.exports = (dbPoolInstance) => {
     getAllIngredients,
     getIngredientsfromRecipe,
     getInstructions,
+    createRecipe,
   };
 };

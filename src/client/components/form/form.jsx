@@ -13,32 +13,52 @@ class Form extends React.Component {
       newRecipe: {
         name: null,
         images: [null],
-        ingredients: [null],
-        instructions: [null]
+        ingredients: null,
+        instructions: [null],
       }
     }
-    this.clickHandler = this.clickHandler.bind(this);
+    this.redirectRoute = this.redirectRoute.bind(this);
     this.handleStep = this.handleStep.bind(this);
     this.createRecipe = this.createRecipe.bind(this);
     this.saveSingleInput = this.saveSingleInput.bind(this);
     this.saveArrayInput = this.saveArrayInput.bind(this);
     this.addInputBar = this.addInputBar.bind(this);
     this.deleteInputBar = this.deleteInputBar.bind(this);
+    this.toggleCheck = this.toggleCheck.bind(this);
   }
 
-  clickHandler(){
+  componentDidMount() {
+    // get all ingredients for user to choose
+    fetch(`/api/ingredients/`)
+        .then(res => res.json())
+        .then(json => {
+            let mappedIng = json.map((ing)=>{
+                ing.checked = false;
+                return ing;
+            })
+            this.state.newRecipe.ingredients = mappedIng;
+            this.setState({ newRecipe : this.state.newRecipe })
+        });
+  }
+
+  redirectRoute(){
     setTimeout(()=>{
       this.props.history.push('/');
     }, 100);
   }
 
+  toggleCheck (id) {
+    this.state.newRecipe.ingredients.forEach((ing)=>{
+        if (ing.id === parseInt(id)) {
+            ing.checked = !ing.checked;
+        }
+    })
+    this.setState({newRecipe : this.state.newRecipe});
+  }
+
   handleStep (action) {
     let currentStep = this.state.currentStep;
-    if (action) {
-      currentStep += 1;
-    } else {
-      currentStep -= 1;
-    }
+    action ? currentStep +=1 : currentStep -=1;
     this.setState({currentStep: currentStep})
   }
 
@@ -48,7 +68,6 @@ class Form extends React.Component {
   }
 
   saveArrayInput (index, inputValue, type) {
-    console.log('testtttt in input')
     this.state.newRecipe[type][index] = inputValue;
     this.setState({ newRecipe : this.state.newRecipe });
   } 
@@ -66,8 +85,28 @@ class Form extends React.Component {
   }
 
   createRecipe () {
-    console.log('New Recipe: ', this.state.newRecipe);
-    // this.clickHandler();
+    let ingredients = this.state.newRecipe.ingredients.filter((ing)=> ing.checked);
+    this.state.newRecipe.ingredients = ingredients;
+
+    let data = this.state.newRecipe;
+    let url = `/recipes`
+
+    console.log('recipe created!')
+    console.log(data)
+    console.log(url)
+    
+    fetch(url, {
+      method: 'POST',
+      body: JSON.stringify(data),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(res => {
+      console.log('success!')
+      this.redirectRoute();
+    })
+    .catch(error => console.error('Error: ', error))
   }
 
   render() {
@@ -79,7 +118,7 @@ class Form extends React.Component {
         stepContainer = 
         <StepOne 
           addInputBar={this.addInputBar}
-          backToHome={this.clickHandler}
+          backToHome={this.redirectRoute}
           changeStep={this.handleStep}
           deleteInputBar={this.deleteInputBar}
           recipe={this.state.newRecipe}
@@ -92,6 +131,9 @@ class Form extends React.Component {
         stepContainer = 
         <StepTwo 
           changeStep={this.handleStep}
+          toggleCheck={this.toggleCheck}
+          ingredients={this.state.newRecipe.ingredients}
+          
         />
         break;
 

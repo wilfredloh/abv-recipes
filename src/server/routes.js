@@ -9,6 +9,8 @@ module.exports = (app, db) => {
   app.get('/api/ingredients', recipes.getIngredients);
   app.get('/api/recipeIngredients/:id', recipes.getIngredientsFromRecipe);
   app.get('/api/instructions/:id', recipes.getInstructions);
+  
+  app.post('/recipes', recipes.createRecipe);
 
 
 };
