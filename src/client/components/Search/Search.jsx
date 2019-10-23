@@ -61,13 +61,13 @@ class Search extends React.Component {
                         
                         return (
                             <div key={i}>
-                                <h3>{recipe.name}</h3>
                                 <img 
                                 src={src[0]}
                                 onClick={()=>{
                                     this.props.chooseRecipe(recipe.id);
                                 }}
                                 />
+                                <p>{recipe.name}</p>
                             </div>
                         )
                     })

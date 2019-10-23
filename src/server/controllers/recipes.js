@@ -16,7 +16,6 @@ module.exports = (db) => {
           response.send('not found');
 
         }else{
-          // console.log('got result: ', recipes);
           response.send(recipes);
         }
       }
@@ -39,7 +38,6 @@ module.exports = (db) => {
           response.send('not found');
 
         }else{
-          // console.log('got result: ', images);
           response.send(images);
         }
       }
@@ -64,7 +62,6 @@ module.exports = (db) => {
           response.send('not found');
 
         }else{
-          // console.log('got result: ', images);
           response.send(images);
         }
       }
@@ -87,7 +84,6 @@ module.exports = (db) => {
           response.send('not found');
 
         }else{
-          // console.log('got result: ', recipes);
           response.send(recipes);
         }
       }
@@ -111,7 +107,6 @@ module.exports = (db) => {
           response.send('not found');
 
         }else{
-          // console.log('got result: ', ingredients);
           response.send(ingredients);
         }
       }
@@ -135,7 +130,6 @@ module.exports = (db) => {
           response.send('not found');
 
         }else{
-          // console.log('got result: ', ingredients);
           response.send(ingredients);
         }
       }
@@ -143,9 +137,6 @@ module.exports = (db) => {
   };
 
   let createRecipe = async function (request, response) {
-    console.log('@@@@@@@@@@@@@@@@@@@@@$$$####')
-    console.log(request.body)
-    console.log('@@@@@@@@@@@@@@@@@@@@@')
 
     try{
       let recipe = request.body;
@@ -166,28 +157,8 @@ module.exports = (db) => {
       }
       response.send('OK');
     } catch (error) {
-      console.log('error in controller', error);
+      console.log('error in controller createRecipe', error);
     }
-    
-    // db.recipes.createRecipe( newRecipe, (error, recipe) => {
-
-    //   if (error) {
-    //     console.error('error getting recipe', error);
-    //     response.status(500);
-    //     response.send('server error');
-
-    //   } else {
-        
-    //     if( recipe === null ){
-    //       response.status(404);
-    //       response.send('not found');
-
-    //     }else{
-    //       console.log('got result: ', recipe);
-    //       response.send('ok!');
-    //     }
-    //   }
-    // });
   };
 
   return {

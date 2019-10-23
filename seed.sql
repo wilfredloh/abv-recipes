@@ -1,9 +1,9 @@
-INSERT INTO recipes (name) VALUES ('Spiced Fresh Tomato Soup');
-INSERT INTO recipes (name) VALUES ('Chicken Rice');
-INSERT INTO recipes (name) VALUES ('Char Kway Teow');
-INSERT INTO recipes (name) VALUES ('Cheesecake');
-INSERT INTO recipes (name) VALUES ('Fried Chicken');
-INSERT INTO recipes (name) VALUES ('Cereal');
+INSERT INTO recipes (name, about) VALUES ('Spiced Fresh Tomato Soup', 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.');
+INSERT INTO recipes (name, about) VALUES ('Chicken Rice', 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.');
+INSERT INTO recipes (name, about) VALUES ('Char Kway Teow', 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.');
+INSERT INTO recipes (name, about) VALUES ('Cheesecake', 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.');
+INSERT INTO recipes (name, about) VALUES ('Fried Chicken', 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.');
+INSERT INTO recipes (name, about) VALUES ('Cereal', 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.');
 
 
 INSERT INTO images (url, recipe_id) VALUES ('https://hips.hearstapps.com/hmg-prod/images/delish-classic-tomato-soup-seo-01-1539282214.jpg', 1);

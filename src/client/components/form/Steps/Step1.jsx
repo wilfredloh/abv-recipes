@@ -7,6 +7,7 @@ class StepOne extends React.Component {
     render() {
         let type = 'images'
         let name = this.props.recipe.name ? this.props.recipe.name : '';
+        let about = this.props.recipe.about ? this.props.recipe.about : '';
         
         let imagesArr = this.props.recipe.images.map((img,i)=>{
             let currentValue = img ? img : '';
@@ -48,6 +49,13 @@ class StepOne extends React.Component {
                     defaultValue={name}
                     onChange={(event)=>{
                         this.props.saveSingleInput(event.target.value, 'name');
+                    }}
+                />
+                <p>About</p>
+                <input 
+                    defaultValue={about}
+                    onChange={(event)=>{
+                        this.props.saveSingleInput(event.target.value, 'about');
                     }}
                 />
 

@@ -8,8 +8,8 @@ module.exports = (dbPoolInstance) => {
   let saveRecipe = async function (recipe, callback) {
 
     try {
-      const queryString = `INSERT INTO recipes (name) VALUES ($1) RETURNING *`;
-      const values = [ recipe.name ];
+      const queryString = `INSERT INTO recipes (name, about) VALUES ($1, $2) RETURNING *`;
+      const values = [ recipe.name, recipe.about];
 
       let queryResult = await dbPoolInstance.query(queryString, values);
 

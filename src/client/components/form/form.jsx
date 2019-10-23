@@ -12,6 +12,7 @@ class Form extends React.Component {
       currentStep: 1,
       newRecipe: {
         name: null,
+        about: null,
         images: [null],
         ingredients: null,
         instructions: [null],
@@ -83,7 +84,7 @@ class Form extends React.Component {
 
     let data = this.state.newRecipe;
     let url = `/recipes`;
-    console.log('test')
+
     fetch(url, {
       method: 'POST',
       body: JSON.stringify(data),
@@ -92,7 +93,6 @@ class Form extends React.Component {
       }
     })
     .then(res => {
-      console.log('test!')
       setTimeout(()=>{
         this.props.history.push('/');
       }, 500);

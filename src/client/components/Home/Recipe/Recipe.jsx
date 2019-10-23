@@ -56,28 +56,15 @@ class Recipe extends React.Component {
             }) : <p>No ingredients!</p>;
         }
 
-        // let dryIgredients = this.props.ingredients ?  this.props.ingredients.map((ingredient, i)=>{
-        //     if (ingredient.type === 'dry') {
-        //         return <li key={i}>{ingredient.name}</li>
-        //     }
-        // }) : <p>No ingredients!</p>;
-
-        // let ingredients2 = this.props.ingredients ?  this.props.ingredients.map((ingredient, i)=>{
-        //     if (ingredient.type === 'wet') {
-        //         return <li key={i}>{ingredient.name}</li>
-        //     }
-        // }) : <p>No ingredients!</p>;
-
         let instructions = this.props.instructions ? this.props.instructions.map((instruction, i)=>{
             return <p key={i}>{i+1}. {instruction.description}</p>
         }) : <p>No instructions!</p>;
-
         
         
         let recipe = this.props.recipe ? 
             <div>
                 <h2>{this.props.recipe.name}</h2>
-                <img src={this.props.recipe.img}/>
+                <p>{this.props.recipe.about}</p>
                 {images}
                 <div>
                     <h3>Ingredients</h3>
