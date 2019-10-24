@@ -41,6 +41,7 @@ class Recipes extends React.Component {
             images={this.props.images}
             deleteRecipe={this.props.deleteRecipe}
             toCreateForm={this.props.toCreateForm}
+            recipesIng={this.props.recipesIng}
         />
       </div>
     );

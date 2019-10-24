@@ -16,6 +16,7 @@ class Home extends React.Component {
             recipe: null,
             recipeIngredients: null,
             searchWord: null,
+            recipesIng:null
         };
         this.toCreateForm = this.toCreateForm.bind(this);
         this.chooseRecipe = this.chooseRecipe.bind(this);
@@ -33,6 +34,13 @@ class Home extends React.Component {
         fetch('/api/images')
             .then(res => res.json())
             .then(json => this.setState({images: json}))
+            .catch(error => console.error('error', error))
+        fetch('/api/recipesIng')
+            .then(res => res.json())
+            .then(json => {
+                console.log(json,'json')
+                this.setState({recipesIng: json})
+            })
             .catch(error => console.error('error', error))
     }
 
@@ -115,6 +123,7 @@ class Home extends React.Component {
                         images={this.state.images}
                         deleteRecipe={this.deleteRecipe}
                         toCreateForm={this.toCreateForm}
+                        recipesIng = {this.state.recipesIng}
                     />
                     <Recipe 
                         recipe={this.state.recipe}

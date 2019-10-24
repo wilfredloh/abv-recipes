@@ -6,19 +6,39 @@ class Search extends React.Component {
 
     render() {
         let images = this.props.images ? this.props.images : null;
-
-        let arrayToFilter = this.props.array;
+        console.log(this.props.recipesIng, 'hereerere')
+        let arrayToFilter = this.props.recipesIng;
         let searchType = this.props.searchType;
         let filteredArr = ''
         let mappedArr = ''
         
         // console.log("arrayToFilter: ", arrayToFilter);
         if (arrayToFilter) {
-            filteredArr = this.props.searchWord ? arrayToFilter.filter(r => r.name.toLowerCase().includes(this.props.searchWord)) 
+            filteredArr = this.props.searchWord ? arrayToFilter.filter(r => r.ingredients.toLowerCase().includes(this.props.searchWord)|| r.name.toLowerCase().includes(this.props.searchWord)) 
             : arrayToFilter;
 
-            if (filteredArr.length === 0) {
-                mappedArr = <img src="https://thumbs.gfycat.com/AmbitiousRingedAmazontreeboa-small.gif"/>
+            
+
+            if (filteredArr.length === 0 && arrayToFilter.length === 0) {
+                mappedArr = 
+                <div>
+                    <img src="https://thumbs.gfycat.com/AmbitiousRingedAmazontreeboa-small.gif"/>
+                    <p>You don't have any recipes!</p>
+                    <button 
+                        className="btn btn-success"
+                        onClick={()=>{
+                            this.props.toCreateForm();
+                        }}
+                        >Create a recipe
+                    </button>
+                </div>
+
+            } else if (filteredArr.length === 0) {
+                mappedArr = 
+                <div>
+                    <p>No correct filter</p>
+                </div>
+
             } else {
                 if (searchType === 'ing'){
                     mappedArr = filteredArr.map( (ing, i)=> {

@@ -186,6 +186,15 @@ module.exports = (db) => {
     });
   };
 
+  let getRecipeWithIng = async (request, response) => {
+
+    console.log('in delete recipe');
+
+    let recipe = await db.recipes.recipeWithIng();
+    
+    response.send(recipe)
+  };
+
   return {
     getRecipes,
     getImages,
@@ -195,5 +204,6 @@ module.exports = (db) => {
     getInstructions,
     createRecipe,
     deleteRecipe,
+    getRecipeWithIng
   }
 };

@@ -14,5 +14,5 @@ module.exports = (app, db) => {
   
   app.post('/recipes', recipes.createRecipe);
   app.delete('/recipes/:id', recipes.deleteRecipe);
-
+  app.get('/api/recipesIng',recipes.getRecipeWithIng);
 };

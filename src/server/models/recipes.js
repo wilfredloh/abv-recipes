@@ -219,6 +219,26 @@ module.exports = (dbPoolInstance) => {
       console.log('error in model delete RECIPE', error)
     }
   };
+
+  let recipeWithIng = async function (callback) {
+
+    try {
+      const queryString = `SELECT id, name, string_agg(x.ingredient_name,',') AS ingredients FROM (SELECT recipes.id,recipes.name,recipe_ingredients.ingredient_id,ingredients.name AS ingredient_name FROM recipes INNER JOIN recipe_ingredients ON (recipes.id = recipe_ingredients.recipe_id) INNER JOIN ingredients ON (recipe_ingredients.ingredient_id = ingredients.id)) AS x GROUP BY name,id`;
+
+      let queryResult = await dbPoolInstance.query(queryString);
+
+      if (queryResult.rows.length > 0 ){
+        console.log('result: ', queryResult);
+        return queryResult.rows;
+      } else {
+        return Promise.reject(new Error('querry is null'));
+      }
+    } catch (error) {
+      console.log('error in model recipe with ing RECIPE', error)
+    }
+  };
+
+  
   
   
 
@@ -234,5 +254,6 @@ module.exports = (dbPoolInstance) => {
     saveIngredients,
     saveInstructions,
     deleteRecipe,
+    recipeWithIng
   };
 };
