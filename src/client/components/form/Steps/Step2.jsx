@@ -1,7 +1,7 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 
-import Search from '../../Search/Search';
+// import Search from '../../Search/Search';
 
 class StepTwo extends React.Component {
     

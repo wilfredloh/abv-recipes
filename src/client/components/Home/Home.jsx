@@ -16,7 +16,7 @@ class Home extends React.Component {
             recipe: null,
             recipeIngredients: null,
             searchWord: null,
-            recipesIng:null
+            recipesIng: null
         };
         this.toCreateForm = this.toCreateForm.bind(this);
         this.chooseRecipe = this.chooseRecipe.bind(this);
@@ -35,12 +35,10 @@ class Home extends React.Component {
             .then(res => res.json())
             .then(json => this.setState({images: json}))
             .catch(error => console.error('error', error))
+
         fetch('/api/recipesIng')
             .then(res => res.json())
-            .then(json => {
-                console.log(json,'json')
-                this.setState({recipesIng: json})
-            })
+            .then(json => this.setState({recipesIng: json}))
             .catch(error => console.error('error', error))
     }
 
@@ -96,9 +94,9 @@ class Home extends React.Component {
     }
 
     deleteRecipe(id, index) {
-        this.state.recipes.splice(index, 1);
+        this.state.recipesIng.splice(index, 1);
         let url = `/recipes/${id}`;
-        this.setState({ recipes : this.state.recipes });
+        this.setState({ recipesIng : this.state.recipesIng });
         fetch(url, { method: 'DELETE' })
             .then(res => console.log('deleted!'))
             .catch(error => console.error('Error: ', error))
@@ -110,14 +108,14 @@ class Home extends React.Component {
                 <div className={styles.nav}>
                     <input 
                         className={"form-control col-8"}
-                        placeholder="Find a recipe"
+                        placeholder="Search for a recipe"
                         onChange={this.setWord}>
                     </input>
                     <button className={"btn btn-warning"}onClick={this.toCreateForm}>Create New Recipe</button>
                 </div>
                 <div className={styles.recipeContainer}>
                     <Recipes 
-                        recipes={this.state.recipes} 
+                        // recipes={this.state.recipes} 
                         chooseRecipe={this.chooseRecipe}
                         searchWord = {this.state.searchWord}
                         images={this.state.images}
@@ -132,7 +130,6 @@ class Home extends React.Component {
                         selectedImages={this.state.selectedImages}
                     />
                 </div>
-                
             </div>
         );
     }

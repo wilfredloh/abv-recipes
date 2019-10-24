@@ -234,7 +234,7 @@ module.exports = (dbPoolInstance) => {
         return Promise.reject(new Error('querry is null'));
       }
     } catch (error) {
-      console.log('error in model recipe with ing RECIPE', error)
+      console.log('error in model recipe with ing ', error)
     }
   };
 

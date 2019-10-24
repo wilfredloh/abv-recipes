@@ -1,7 +1,7 @@
 import React from 'react';
 
 import styles from '../style.scss'
-import Search from '../../Search/Search';
+import Search from '../../Search/SearchRecipe';
 
 class Recipes extends React.Component {
   constructor() {
@@ -34,7 +34,7 @@ class Recipes extends React.Component {
       <div className={`col-5 ${styles.recipes}`} >
         {/* {recipes} */}
         <Search
-            array = {this.props.recipes}
+            // array = {this.props.recipes}
             searchWord = {this.props.searchWord}
             searchType={this.state.searchType}
             chooseRecipe={this.props.chooseRecipe}

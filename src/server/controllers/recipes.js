@@ -188,11 +188,12 @@ module.exports = (db) => {
 
   let getRecipeWithIng = async (request, response) => {
 
-    console.log('in delete recipe');
-
-    let recipe = await db.recipes.recipeWithIng();
-    
-    response.send(recipe)
+    try{
+      let recipe = await db.recipes.recipeWithIng();
+      response.send(recipe);
+    } catch (error) {
+      console.log('error in controller getRecipeWithIng', error);
+    }
   };
 
   return {
