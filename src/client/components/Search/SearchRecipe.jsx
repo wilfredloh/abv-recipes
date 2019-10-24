@@ -7,7 +7,7 @@ class SearchRecipe extends React.Component {
     render() {
         let images = this.props.images ? this.props.images : null;
 
-        let arrayToFilter = this.props.recipesIng;
+        let arrayToFilter = this.props.recipes;
         let filteredArr = ''
         let mappedArr = ''
         
@@ -45,7 +45,6 @@ class SearchRecipe extends React.Component {
                                 />
                                 <p>{recipe.name}</p>
                                 <button 
-                                    // id={recipe.id}
                                     onClick={()=>{
                                         this.props.deleteRecipe(recipe.id, i);
                                     }}

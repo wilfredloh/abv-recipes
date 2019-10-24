@@ -10,26 +10,20 @@ class Home extends React.Component {
         super();
         this.state = {
             images: null,
-            selectedImages: null,
             instructions: null,
-            recipes: null,
             recipe: null,
+            recipes: null,
             recipeIngredients: null,
             searchWord: null,
-            recipesIng: null
+            selectedImages: null,
         };
-        this.toCreateForm = this.toCreateForm.bind(this);
         this.chooseRecipe = this.chooseRecipe.bind(this);
-        this.setWord = this.setWord.bind(this);
         this.deleteRecipe = this.deleteRecipe.bind(this);
+        this.setWord = this.setWord.bind(this);
+        this.toCreateForm = this.toCreateForm.bind(this);
     }
 
     componentDidMount() {
-        // get all recipes to display on home page
-        fetch('/api/recipes')
-            .then(res => res.json())
-            .then(json => this.setState({recipes: json}))
-            .catch(error => console.error('error', error))
 
         fetch('/api/images')
             .then(res => res.json())
@@ -38,11 +32,10 @@ class Home extends React.Component {
 
         fetch('/api/recipesIng')
             .then(res => res.json())
-            .then(json => this.setState({recipesIng: json}))
+            .then(json => this.setState({recipes: json}))
             .catch(error => console.error('error', error))
     }
 
-    // show create new recipe page/route
     toCreateForm() {
         setTimeout(()=>{
         this.props.history.push('/new');
@@ -89,14 +82,22 @@ class Home extends React.Component {
                 console.error('error', error.message)
             })
 
-        let currentRecipe = this.state.recipes.filter( x => x.id === id);
+        let currentRecipe = this.state.recipes.filter( recipe => recipe.id === id);
         this.setState({recipe: currentRecipe[0]})
     }
 
     deleteRecipe(id, index) {
-        this.state.recipesIng.splice(index, 1);
+        this.state.recipes.splice(index, 1);
         let url = `/recipes/${id}`;
-        this.setState({ recipesIng : this.state.recipesIng });
+        if (this.state.recipe) {
+            if (id === this.state.recipe.id) {
+                this.setState({
+                    recipe : null,
+                });
+            }
+        }
+        this.setState({ recipes : this.state.recipes });
+
         fetch(url, { method: 'DELETE' })
             .then(res => console.log('deleted!'))
             .catch(error => console.error('Error: ', error))
@@ -111,22 +112,25 @@ class Home extends React.Component {
                         placeholder="Search for a recipe"
                         onChange={this.setWord}>
                     </input>
-                    <button className={"btn btn-warning"}onClick={this.toCreateForm}>Create New Recipe</button>
+                    <button 
+                        className={"btn btn-warning"}
+                        onClick={this.toCreateForm}
+                        >Create New Recipe
+                    </button>
                 </div>
                 <div className={styles.recipeContainer}>
                     <Recipes 
-                        // recipes={this.state.recipes} 
                         chooseRecipe={this.chooseRecipe}
-                        searchWord = {this.state.searchWord}
-                        images={this.state.images}
                         deleteRecipe={this.deleteRecipe}
+                        images={this.state.images}
+                        recipes = {this.state.recipes}
+                        searchWord = {this.state.searchWord}
                         toCreateForm={this.toCreateForm}
-                        recipesIng = {this.state.recipesIng}
                     />
                     <Recipe 
-                        recipe={this.state.recipe}
                         ingredients={this.state.recipeIngredients}
                         instructions={this.state.instructions}
+                        recipe={this.state.recipe}
                         selectedImages={this.state.selectedImages}
                     />
                 </div>
