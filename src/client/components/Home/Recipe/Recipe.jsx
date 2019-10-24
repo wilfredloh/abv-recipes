@@ -24,21 +24,28 @@ class Recipe extends React.Component {
 
     render() {
 
+        const {
+            ingredients,
+            instructions,
+            recipe,
+            selectedImages,
+        } = this.props;
+
         let container = '';
         let dryIngredients = '';
         let wetIngredients = '';
-        let images = this.props.selectedImages ? this.props.selectedImages.map((images, i)=>{
+        let images = selectedImages ? selectedImages.map((images, i)=>{
             return <img key={i} src={images.url}/>
         }) : <p>No images!</p>;
         
         if (this.state.groupable) {
-            dryIngredients = this.props.ingredients ?  this.props.ingredients.map((ingredient, i)=>{
+            dryIngredients = ingredients ?  ingredients.map((ingredient, i)=>{
                 if (ingredient.type === 'dry') {
                     return <li key={i}>{ingredient.amount} {ingredient.measurement} {ingredient.name} </li>
                 }
             }) : <p>No dry ingredients!</p>;
 
-            wetIngredients = this.props.ingredients ?  this.props.ingredients.map((ingredient, i)=>{
+            wetIngredients = ingredients ?  ingredients.map((ingredient, i)=>{
                 if (ingredient.type === 'wet') {
                     return <li key={i}>{ingredient.amount} {ingredient.measurement} {ingredient.name}</li>
                 }
@@ -52,20 +59,20 @@ class Recipe extends React.Component {
                 {wetIngredients}
             </div>
         } else {
-            container = this.props.ingredients ?  this.props.ingredients.map((ingredient, i)=>{
+            container = ingredients ?  ingredients.map((ingredient, i)=>{
                 return <li key={i}>{ingredient.amount} {ingredient.measurement} {ingredient.name}</li>
             }) : <p>No ingredients!</p>;
         }
 
-        let instructions = this.props.instructions ? this.props.instructions.map((instruction, i)=>{
+        let instructionsCont = instructions ? instructions.map((instruction, i)=>{
             return <p key={i}>{i+1}. {instruction.description}</p>
         }) : <p>No instructions!</p>;
         
         
-        let recipe = this.props.recipe ? 
+        let recipeCont = recipe ? 
             <div>
-                <h2>{this.props.recipe.name}</h2>
-                <p>{this.props.recipe.about}</p>
+                <h2>{recipe.name}</h2>
+                <p>{recipe.about}</p>
                 {images}
                 <div>
                     <h3>Ingredients</h3>
@@ -74,7 +81,7 @@ class Recipe extends React.Component {
                 </div>
                 <div>
                     <h3>Instructions</h3>
-                    {instructions}
+                    {instructionsCont}
                 </div>
             </div>
         : 
@@ -85,7 +92,7 @@ class Recipe extends React.Component {
 
         return (
             <div className={`col-6 ${styles.recipe}`}>
-                {recipe}
+                {recipeCont}
             </div>
         );
     }

@@ -5,16 +5,25 @@ import { withRouter } from 'react-router-dom';
 class StepThree extends React.Component {
 
     render() {
+        const {
+            addInputBar,
+            changeStep,
+            createRecipe,
+            deleteInputBar,
+            recipe,
+            saveArrayInput,
+        } = this.props;
+
         let type = 'instructions';
 
-        let instructionsArr = this.props.recipe.instructions.map((ins,i)=>{
+        let instructionsArr = recipe.instructions.map((ins,i)=>{
             let currentValue = ins ? ins : '';
             let deleteButton = 
                 <button 
                     id={i}
                     onClick={(event)=>{
                         let el = event.target
-                        this.props.deleteInputBar(el.id, type);
+                        deleteInputBar(el.id, type);
                     }}
                 > x 
                 </button>;
@@ -30,7 +39,7 @@ class StepThree extends React.Component {
                         value={currentValue}
                         onChange={(event)=>{
                             let el = event.target;
-                            this.props.saveArrayInput(el.id, el.value, type);
+                            saveArrayInput(el.id, el.value, type);
                         }}
                     />
                     {deleteButton}
@@ -47,7 +56,7 @@ class StepThree extends React.Component {
                 <button 
                     className={`btn btn-light`}
                     onClick={ ()=> {
-                        this.props.addInputBar(type);
+                        addInputBar(type);
                     }}>
                     Add step
                 </button>
@@ -55,14 +64,14 @@ class StepThree extends React.Component {
                 <button 
                     className={`btn btn-success`}
                     onClick={ ()=> {
-                        this.props.createRecipe()
+                        createRecipe()
                     }}>
                     Create Recipe!
                 </button>
                 <button 
                     className={`btn btn-secondary`}
                     onClick={ ()=> {
-                        this.props.changeStep(false)
+                        changeStep(false)
                     }}>
                     Back
                 </button>

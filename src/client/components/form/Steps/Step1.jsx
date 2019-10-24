@@ -5,18 +5,28 @@ import { withRouter } from 'react-router-dom';
 class StepOne extends React.Component {
 
     render() {
+        const { 
+            addInputBar,
+            backToHome,
+            changeStep,
+            deleteInputBar, 
+            recipe, 
+            saveArrayInput, 
+            saveSingleInput,
+        } = this.props;
+
         let type = 'images'
-        let name = this.props.recipe.name ? this.props.recipe.name : '';
-        let about = this.props.recipe.about ? this.props.recipe.about : '';
+        let name = recipe.name ? recipe.name : '';
+        let about = recipe.about ? recipe.about : '';
         
-        let imagesArr = this.props.recipe.images.map((img,i)=>{
+        let imagesArr = recipe.images.map((img,i)=>{
             let currentValue = img ? img : '';
             let deleteButton = 
                 <button 
                     id={i}
                     onClick={(event)=>{
                         let el = event.target
-                        this.props.deleteInputBar(el.id, type);
+                        deleteInputBar(el.id, type);
                     }}
                 > x 
                 </button>;
@@ -32,7 +42,7 @@ class StepOne extends React.Component {
                         value={currentValue}
                         onChange={(event)=>{
                             let el = event.target;
-                            this.props.saveArrayInput(el.id, el.value, type);
+                            saveArrayInput(el.id, el.value, type);
 
                         }}
                     />
@@ -48,14 +58,14 @@ class StepOne extends React.Component {
                 <input 
                     defaultValue={name}
                     onChange={(event)=>{
-                        this.props.saveSingleInput(event.target.value, 'name');
+                        saveSingleInput(event.target.value, 'name');
                     }}
                 />
                 <p>About</p>
-                <input 
+                <textarea 
                     defaultValue={about}
                     onChange={(event)=>{
-                        this.props.saveSingleInput(event.target.value, 'about');
+                        saveSingleInput(event.target.value, 'about');
                     }}
                 />
 
@@ -64,21 +74,21 @@ class StepOne extends React.Component {
                 <button 
                     className={`btn btn-light`}
                     onClick={ ()=> {
-                        this.props.addInputBar(type);
+                        addInputBar(type);
                     }}>
                     Add image
                 </button>
                 <button 
                     className={`btn btn-success`}
                     onClick={()=> {
-                        this.props.changeStep(true);
+                        changeStep(true);
                     }}>
                     Choose Ingredients
                 </button>
                 <button 
                     className={`btn btn-secondary`}
                     onClick={()=> {
-                        this.props.backToHome();
+                        backToHome();
                     }}>
                     Back
                 </button>

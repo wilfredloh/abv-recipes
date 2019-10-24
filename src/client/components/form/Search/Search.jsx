@@ -5,13 +5,14 @@ import { withRouter } from 'react-router-dom';
 class Search extends React.Component {
 
     render() {
+        const { ingredients, searchWord, toggleCheck } = this.props;
 
-        let arrayToFilter = this.props.ingredients;
+        let arrayToFilter = ingredients;
         let filteredArr = ''
         let mappedArr = ''
         
         if (arrayToFilter) {
-                filteredArr = this.props.searchWord ? arrayToFilter.filter(r => r.name.toLowerCase().includes(this.props.searchWord)) 
+                filteredArr = searchWord ? arrayToFilter.filter(r => r.name.toLowerCase().includes(searchWord)) 
                 : arrayToFilter;
     
                 if (filteredArr.length === 0) {
@@ -32,7 +33,7 @@ class Search extends React.Component {
                             value={ing.id}
                             onClick={(event)=>{
                                 let el = event.target;
-                                this.props.toggleCheck(el.value, el.id);
+                                toggleCheck(el.value, el.id);
                             }}
                         ></input> : 
                         <input 
@@ -42,7 +43,7 @@ class Search extends React.Component {
                             value={ing.id}
                             onClick={(event)=>{
                                 let el = event.target;
-                                this.props.toggleCheck(el.value, el.id);
+                                toggleCheck(el.value, el.id);
                             }}
                         ></input>
 
