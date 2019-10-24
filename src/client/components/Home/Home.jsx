@@ -17,9 +17,10 @@ class Home extends React.Component {
             recipeIngredients: null,
             searchWord: null,
         };
-        this.clickHandler = this.clickHandler.bind(this);
+        this.toCreateForm = this.toCreateForm.bind(this);
         this.chooseRecipe = this.chooseRecipe.bind(this);
         this.setWord = this.setWord.bind(this);
+        this.deleteRecipe = this.deleteRecipe.bind(this);
     }
 
     componentDidMount() {
@@ -36,7 +37,7 @@ class Home extends React.Component {
     }
 
     // show create new recipe page/route
-    clickHandler() {
+    toCreateForm() {
         setTimeout(()=>{
         this.props.history.push('/new');
         }, 100);
@@ -86,6 +87,15 @@ class Home extends React.Component {
         this.setState({recipe: currentRecipe[0]})
     }
 
+    deleteRecipe(id, index) {
+        this.state.recipes.splice(index, 1);
+        let url = `/recipes/${id}`;
+        this.setState({ recipes : this.state.recipes });
+        fetch(url, { method: 'DELETE' })
+            .then(res => console.log('deleted!'))
+            .catch(error => console.error('Error: ', error))
+    }
+
     render() {
         return (
             <div>
@@ -95,7 +105,7 @@ class Home extends React.Component {
                         placeholder="Find a recipe"
                         onChange={this.setWord}>
                     </input>
-                    <button className={"btn btn-warning"}onClick={this.clickHandler}>Create New Recipe</button>
+                    <button className={"btn btn-warning"}onClick={this.toCreateForm}>Create New Recipe</button>
                 </div>
                 <div className={styles.recipeContainer}>
                     <Recipes 
@@ -103,7 +113,8 @@ class Home extends React.Component {
                         chooseRecipe={this.chooseRecipe}
                         searchWord = {this.state.searchWord}
                         images={this.state.images}
-
+                        deleteRecipe={this.deleteRecipe}
+                        toCreateForm={this.toCreateForm}
                     />
                     <Recipe 
                         recipe={this.state.recipe}

@@ -200,11 +200,29 @@ module.exports = (dbPoolInstance) => {
       }
     });
   };
+
+  let deleteRecipe = async function (recipeID, callback) {
+
+    try {
+      const queryString = `DELETE FROM recipes WHERE id = $1 RETURNING *`;
+      const values = [ recipeID ];
+
+      let queryResult = await dbPoolInstance.query(queryString, values);
+
+      if (queryResult.rows.length > 0 ){
+        console.log('result: ', queryResult);
+        return queryResult.rows[0].id;
+      } else {
+        return Promise.reject(new Error('querry is null'));
+      }
+    } catch (error) {
+      console.log('error in model delete RECIPE', error)
+    }
+  };
   
   
 
   return {
-    // create,
     getAllRecipes,
     getAllImages,
     getImagesfromRecipe,
@@ -215,5 +233,6 @@ module.exports = (dbPoolInstance) => {
     saveImages,
     saveIngredients,
     saveInstructions,
+    deleteRecipe,
   };
 };

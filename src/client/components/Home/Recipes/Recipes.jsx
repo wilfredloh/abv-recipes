@@ -39,6 +39,8 @@ class Recipes extends React.Component {
             searchType={this.state.searchType}
             chooseRecipe={this.props.chooseRecipe}
             images={this.props.images}
+            deleteRecipe={this.props.deleteRecipe}
+            toCreateForm={this.props.toCreateForm}
         />
       </div>
     );

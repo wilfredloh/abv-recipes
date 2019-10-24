@@ -1,4 +1,6 @@
 import React from 'react';
+import { withRouter } from 'react-router-dom';
+
 
 class Search extends React.Component {
 
@@ -16,7 +18,7 @@ class Search extends React.Component {
             : arrayToFilter;
 
             if (filteredArr.length === 0) {
-                mappedArr = <h2>Empty Search</h2>
+                mappedArr = <img src="https://thumbs.gfycat.com/AmbitiousRingedAmazontreeboa-small.gif"/>
             } else {
                 if (searchType === 'ing'){
                     mappedArr = filteredArr.map( (ing, i)=> {
@@ -71,13 +73,31 @@ class Search extends React.Component {
                                 }}
                                 />
                                 <p>{recipe.name}</p>
+                                <button 
+                                    // id={recipe.id}
+                                    onClick={()=>{
+                                        this.props.deleteRecipe(recipe.id, i);
+                                    }}
+                                    >Delete
+                                </button>
                             </div>
                         )
                     })
                 }
             }
         } else {
-            mappedArr = <h2>No recipes!</h2>
+            mappedArr = 
+            <div>
+                <img src="https://thumbs.gfycat.com/AmbitiousRingedAmazontreeboa-small.gif"/>
+                <p>You don't have any recipes!</p>
+                <button 
+                    className="btn btn-success"
+                    onClick={()=>{
+                        this.props.toCreateForm();
+                    }}
+                    >Create a recipe
+                </button>
+            </div>
         }
     
         return (
@@ -88,6 +108,7 @@ class Search extends React.Component {
     }
 }
 
-export default Search;
+// export default Search;
+export default withRouter(Search);
 
 

@@ -13,6 +13,6 @@ module.exports = (app, db) => {
   app.get('/api/instructions/:id', recipes.getInstructions);
   
   app.post('/recipes', recipes.createRecipe);
-
+  app.delete('/recipes/:id', recipes.deleteRecipe);
 
 };

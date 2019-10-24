@@ -161,6 +161,31 @@ module.exports = (db) => {
     }
   };
 
+  let deleteRecipe = (request, response) => {
+
+    console.log('in delete recipe');
+
+    let recipeID = request.params.id;
+    db.recipes.deleteRecipe( recipeID, (error, recipe) => {
+ 
+      if (error) {
+        console.error('error getting recipe', error);
+        response.status(500);
+        response.send('server error');
+
+      } else {
+        
+        if( recipe === null ){
+          response.status(404);
+          response.send('not found');
+
+        }else{
+          response.send(recipe);
+        }
+      }
+    });
+  };
+
   return {
     getRecipes,
     getImages,
@@ -169,5 +194,6 @@ module.exports = (db) => {
     getIngredientsFromRecipe,
     getInstructions,
     createRecipe,
+    deleteRecipe,
   }
 };
