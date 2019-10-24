@@ -11,21 +11,21 @@ class Form extends React.Component {
     this.state = {
       currentStep: 1,
       newRecipe: {
-        name: null,
         about: null,
+        name: null,
         images: [null],
         ingredients: null,
         instructions: [null],
       }
     }
-    this.handleStep = this.handleStep.bind(this);
+    this.addInputBar = this.addInputBar.bind(this);
     this.createRecipe = this.createRecipe.bind(this);
+    this.deleteInputBar = this.deleteInputBar.bind(this);
+    this.handleStep = this.handleStep.bind(this);
+    this.redirectRoute = this.redirectRoute.bind(this);
     this.saveSingleInput = this.saveSingleInput.bind(this);
     this.saveArrayInput = this.saveArrayInput.bind(this);
-    this.addInputBar = this.addInputBar.bind(this);
-    this.deleteInputBar = this.deleteInputBar.bind(this);
     this.toggleCheck = this.toggleCheck.bind(this);
-    this.redirectRoute = this.redirectRoute.bind(this);
   }
 
   componentDidMount() {
@@ -42,47 +42,11 @@ class Form extends React.Component {
         });
   }
 
-  toggleCheck (id) {
-    this.state.newRecipe.ingredients.forEach((ing)=>{
-        if (ing.id === parseInt(id)) {
-            ing.checked = !ing.checked;
-        }
-    })
-    this.setState({newRecipe : this.state.newRecipe});
-  }
-
-  handleStep (action) {
-    let currentStep = this.state.currentStep;
-    action ? currentStep +=1 : currentStep -=1;
-    this.setState({currentStep: currentStep})
-  }
-
-  saveSingleInput (input, type) {
-    this.state.newRecipe[type] = input;
-    this.setState({ newRecipe : this.state.newRecipe });
-  }
-
-  saveArrayInput (index, inputValue, type) {
-    this.state.newRecipe[type][index] = inputValue;
-    this.setState({ newRecipe : this.state.newRecipe });
-  } 
-
   addInputBar (type) {
     this.state.newRecipe[type] = [...this.state.newRecipe[type], null];
     this.setState(
       {newRecipe: this.state.newRecipe}
     )
-  }
-
-  deleteInputBar (index, type) {
-    this.state.newRecipe[type].splice(index, 1);
-    this.setState({ newRecipe : this.state.newRecipe });
-  }
-
-  redirectRoute() {
-    setTimeout(()=>{
-      this.props.history.push('/');
-    }, 500);
   }
 
   createRecipe () {
@@ -103,6 +67,42 @@ class Form extends React.Component {
       this.redirectRoute();
     })
     .catch(error => console.error('Error: ', error))
+  }
+
+  deleteInputBar (index, type) {
+    this.state.newRecipe[type].splice(index, 1);
+    this.setState({ newRecipe : this.state.newRecipe });
+  }
+
+  handleStep (action) {
+    let currentStep = this.state.currentStep;
+    action ? currentStep +=1 : currentStep -=1;
+    this.setState({currentStep: currentStep})
+  }
+
+  redirectRoute() {
+    setTimeout(()=>{
+      this.props.history.push('/');
+    }, 500);
+  }
+
+  saveArrayInput (index, inputValue, type) {
+    this.state.newRecipe[type][index] = inputValue;
+    this.setState({ newRecipe : this.state.newRecipe });
+  } 
+
+  saveSingleInput (input, type) {
+    this.state.newRecipe[type] = input;
+    this.setState({ newRecipe : this.state.newRecipe });
+  }
+
+  toggleCheck (id) {
+    this.state.newRecipe.ingredients.forEach((ing)=>{
+        if (ing.id === parseInt(id)) {
+            ing.checked = !ing.checked;
+        }
+    })
+    this.setState({newRecipe : this.state.newRecipe});
   }
 
   render() {
@@ -127,9 +127,8 @@ class Form extends React.Component {
         stepContainer = 
         <StepTwo 
           changeStep={this.handleStep}
-          toggleCheck={this.toggleCheck}
           ingredients={this.state.newRecipe.ingredients}
-          
+          toggleCheck={this.toggleCheck}          
         />
         break;
 

@@ -1,15 +1,16 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 
-// import Search from '../../Search/Search';
+import Search from '../Search/Search';
 
 class StepTwo extends React.Component {
     
     constructor() {
         super();
         this.state = {
+            reminder : '',
+            requiredInput : false,
             searchWord : null,
-            searchType : 'ing'
         }
         this.setWord = this.setWord.bind(this);
     }
@@ -20,29 +21,43 @@ class StepTwo extends React.Component {
     }
 
     render() {
-        
+
+        const { changeStep, ingredients, toggleCheck } = this.props;
+        let { reminder, requiredInput, searchWord } = this.state;
+
         return (
             <div>
                 <h1>#2: Choose Ingredients</h1>
                 <input placeholder="search ingredient" onChange={this.setWord}></input>
                 <br/>
                 <Search
-                    array = {this.props.ingredients}
-                    searchWord = {this.state.searchWord}
-                    searchType = {this.state.searchType}
-                    toggleCheck = {this.props.toggleCheck}
+                    ingredients = {ingredients}
+                    searchWord = {searchWord}
+                    toggleCheck = {toggleCheck}
                 />
                 <button 
                     className={`btn btn-success`}
                     onClick={ ()=> {
-                    this.props.changeStep(true)
+                        ingredients.forEach((ing)=>{
+                            if (ing.checked){
+                                requiredInput = true
+                                return
+                            }
+                        })
+                        if (requiredInput) {
+                            changeStep(true)
+                        } else {
+                            this.setState({reminder: 'Please select at least 1 ingredient'});
+                        }
+                        requiredInput = false
                     }}>
                     Fill in instructions
                 </button>
+                <p>{reminder}</p>
                 <button 
                     className={`btn btn-secondary`}
                     onClick={ ()=> {
-                    this.props.changeStep(false)
+                        changeStep(false)
                     }}>
                     Back
                 </button>
