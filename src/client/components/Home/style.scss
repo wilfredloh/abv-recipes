@@ -1,14 +1,20 @@
 .nav {
     display: flex;
-    justify-content: space-between;
-    margin: 0 2rem;
+    justify-content: right;
+    position: absolute;
+    top: 5%;
+    right: 0%; 
+    width: 50%;
+}
 
+.nav input {
+    margin-right: 1rem;
 }
 
 .recipeContainer {
     display: flex;
     margin: 0.5rem;
-    height: 80vh;
+    height: 85vh;
 }
 
 .recipeContainer > div {
@@ -17,8 +23,6 @@
     background-color: #F8F8F8;
     border-radius: 0.5rem;
 }
-
-
 
 .recipes {
     display: flex;

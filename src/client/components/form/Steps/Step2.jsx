@@ -32,12 +32,16 @@ class StepTwo extends React.Component {
                     searchType = {this.state.searchType}
                     toggleCheck = {this.props.toggleCheck}
                 />
-                <button onClick={ ()=> {
+                <button 
+                    className={`btn btn-success`}
+                    onClick={ ()=> {
                     this.props.changeStep(true)
                     }}>
                     Fill in instructions
                 </button>
-                <button onClick={ ()=> {
+                <button 
+                    className={`btn btn-secondary`}
+                    onClick={ ()=> {
                     this.props.changeStep(false)
                     }}>
                     Back

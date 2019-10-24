@@ -44,18 +44,24 @@ class StepThree extends React.Component {
 
                 {instructionsArr}
 
-                <button onClick={ ()=> {
+                <button 
+                    className={`btn btn-light`}
+                    onClick={ ()=> {
                         this.props.addInputBar(type);
                     }}>
                     Add step
                 </button>
 
-                <button onClick={ ()=> {
+                <button 
+                    className={`btn btn-success`}
+                    onClick={ ()=> {
                         this.props.createRecipe()
                     }}>
-                    Create New Recipe!
+                    Create Recipe!
                 </button>
-                <button onClick={ ()=> {
+                <button 
+                    className={`btn btn-secondary`}
+                    onClick={ ()=> {
                         this.props.changeStep(false)
                     }}>
                     Back

@@ -61,18 +61,23 @@ class StepOne extends React.Component {
 
                 {imagesArr}
 
-                <button onClick={ ()=> {
+                <button 
+                    className={`btn btn-light`}
+                    onClick={ ()=> {
                         this.props.addInputBar(type);
                     }}>
                     Add image
                 </button>
                 <button 
+                    className={`btn btn-success`}
                     onClick={()=> {
                         this.props.changeStep(true);
                     }}>
                     Choose Ingredients
                 </button>
-                <button onClick={()=> {
+                <button 
+                    className={`btn btn-secondary`}
+                    onClick={()=> {
                         this.props.backToHome();
                     }}>
                     Back

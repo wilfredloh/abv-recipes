@@ -91,7 +91,7 @@ class Home extends React.Component {
             <div>
                 <div className={styles.nav}>
                     <input 
-                        className={"form-control col-md-4"}
+                        className={"form-control col-8"}
                         placeholder="Find a recipe"
                         onChange={this.setWord}>
                     </input>
