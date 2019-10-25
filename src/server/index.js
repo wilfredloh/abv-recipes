@@ -4,7 +4,7 @@ const methodOverride = require('method-override');
 const cookieParser = require('cookie-parser');
 const db = require('./db');
 
-process.env.NODE_ENV = process.env.NODE_ENV || 'development';
+process.env.NODE_ENV =  'development';
 process.env.PORT = process.env.PORT || 3000;
 
 function onUnhandledError(err) {
