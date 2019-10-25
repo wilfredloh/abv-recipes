@@ -93,6 +93,7 @@ class Form extends React.Component {
   } 
 
   saveSingleInput (input, type) {
+    console.log('test')
     this.state.newRecipe[type] = input;
     this.setState({ newRecipe : this.state.newRecipe });
   }
