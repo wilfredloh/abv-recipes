@@ -104,14 +104,6 @@ class Home extends React.Component {
         }, 100);
     }
 
-    //UPDATE SECTION!!! ****************************
-    /*
-    1. add input bar
-    2. save single input
-    3. save array input
-    4. delete input bar
-    5. toggle check input
-    */
     updateRecipeInput(inputValue, id, type) {
         let url = `/recipes/input`;
         this.state.recipe[type] = inputValue
@@ -137,9 +129,6 @@ class Home extends React.Component {
           })
           .catch(error => console.error('Error: ', error))
     }
-
-    //END UPDATE SECTION *****************************
-
 
     render() {
         return (
