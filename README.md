@@ -13,16 +13,22 @@
 
 # Installation
 1. Install dependencies
-> npm install
+``` 
+npm install
+```
 2. Create db
-> createdb DATABASE_NAME -U USERNAME
+```
+createdb DATABASE_NAME -U USERNAME
+```
 3. Seed data
-> psql -d DATABASE_NAME -U USERNAME -f tables.sql
->psql -d DATABASE_NAME -U USERNAME -f seed.sql
+```
+psql -d DATABASE_NAME -U USERNAME -f tables.sql
+psql -d DATABASE_NAME -U USERNAME -f seed.sql
+```
 
 # Wireframes
 ![alt_text](https://github.com/wilfredloh/abv-recipes/blob/master/wire.png)
 
 # Entity Relationship Diagram
-![alt_text](https://github.com/wilfredloh/abv-recipes/blob/master/ERD.png)
+![alt_text](https://github.com/wilfredloh/abv-recipes/blob/master/erd.png)
 
