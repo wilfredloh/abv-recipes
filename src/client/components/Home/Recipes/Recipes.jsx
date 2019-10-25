@@ -56,6 +56,7 @@ class Recipes extends React.Component {
                                 />
                                 <p>{recipe.name}</p>
                                 <button 
+                                    className="btn btn-outline-danger"
                                     onClick={()=>{
                                         deleteRecipe(recipe.id, i);
                                     }}

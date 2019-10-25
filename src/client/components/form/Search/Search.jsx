@@ -26,7 +26,7 @@ class Search extends React.Component {
                     mappedArr = filteredArr.map( (ing, i)=> {
                         let input = ing.checked ? 
                         <input 
-                            // className={"form-check-input"}
+                            className={"m-2"}
                             checked
                             id={i}
                             type="checkbox" name="name" 
@@ -37,7 +37,7 @@ class Search extends React.Component {
                             }}
                         ></input> : 
                         <input 
-                            // className={"form-check-input"}
+                            className={"m-2"}
                             id={i}
                             type="checkbox" name="name" 
                             value={ing.id}

@@ -1,5 +1,6 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
+import styles from './style.scss';
 
 import StepOne from './Steps/Step1';
 import StepTwo from './Steps/Step2';
@@ -146,7 +147,7 @@ class Form extends React.Component {
     }
  
     return (
-      <div>
+      <div className={styles.stepContainer}>
         {stepContainer}
       </div>
     );

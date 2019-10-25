@@ -1,5 +1,6 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
+import styles from '../style.scss';
 
 
 class StepOne extends React.Component {
@@ -24,6 +25,7 @@ class StepOne extends React.Component {
             let deleteButton = 
                 <button 
                     id={i}
+                    className="btn btn-outline-danger m-2"
                     onClick={(event)=>{
                         let el = event.target
                         deleteInputBar(el.id, type);
@@ -36,8 +38,12 @@ class StepOne extends React.Component {
 
             return(
                 <div key={i}>
-                    <p>Image {i+1}</p>
+                    <div className={styles.newInput}>
+                        <p>Image {i+1}</p>
+                        {deleteButton}
+                    </div>
                     <input 
+                        className="form-control"
                         id={i}
                         value={currentValue}
                         onChange={(event)=>{
@@ -46,16 +52,26 @@ class StepOne extends React.Component {
 
                         }}
                     />
-                    {deleteButton}
+                    
                 </div>
             )
         })
 
         return (
             <div>
-                <h1>#1: Basic details</h1>
+                <div className={styles.topContainer}>
+                    <h1>Basic Details</h1>
+                    <button 
+                        className={`btn btn-secondary`}
+                        onClick={()=> {
+                            backToHome();
+                        }}>
+                        Back
+                    </button>
+                </div>
                 <p>Title</p>
                 <input 
+                    className="form-control"
                     defaultValue={name}
                     onChange={(event)=>{
                         saveSingleInput(event.target.value, 'name');
@@ -63,6 +79,7 @@ class StepOne extends React.Component {
                 />
                 <p>About</p>
                 <textarea 
+                    className="form-control"
                     defaultValue={about}
                     onChange={(event)=>{
                         saveSingleInput(event.target.value, 'about');
@@ -70,28 +87,24 @@ class StepOne extends React.Component {
                 />
 
                 {imagesArr}
-
-                <button 
-                    className={`btn btn-light`}
-                    onClick={ ()=> {
-                        addInputBar(type);
-                    }}>
-                    Add image
-                </button>
-                <button 
-                    className={`btn btn-success`}
-                    onClick={()=> {
-                        changeStep(true);
-                    }}>
-                    Choose Ingredients
-                </button>
-                <button 
-                    className={`btn btn-secondary`}
-                    onClick={()=> {
-                        backToHome();
-                    }}>
-                    Back
-                </button>
+                
+                <div className={styles.buttonContainer}>
+                    <button 
+                        className={`btn btn-light`}
+                        onClick={ ()=> {
+                            addInputBar(type);
+                        }}>
+                        Add image
+                    </button>
+                    <button 
+                        className={`btn btn-success`}
+                        onClick={()=> {
+                            changeStep(true);
+                        }}>
+                        Choose Ingredients
+                    </button>
+                    
+                </div>
             </div>
         );
     }

@@ -48,3 +48,9 @@
 .recipe div {
     margin: 0 auto;
 }
+
+.recipeEmpty{
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+}

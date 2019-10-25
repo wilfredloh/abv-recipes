@@ -1,5 +1,6 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
+import styles from '../style.scss';
 
 
 class StepThree extends React.Component {
@@ -21,6 +22,7 @@ class StepThree extends React.Component {
             let deleteButton = 
                 <button 
                     id={i}
+                    className="btn btn-outline-danger m-2"
                     onClick={(event)=>{
                         let el = event.target
                         deleteInputBar(el.id, type);
@@ -33,8 +35,12 @@ class StepThree extends React.Component {
             
             return(
                 <div key={i}>
-                    <p>Step {i+1}</p>
+                    <div className={styles.newInput}>
+                        <p>Step {i+1}</p>
+                        {deleteButton}
+                    </div>
                     <textarea 
+                        className="form-control"
                         id={i}
                         value={currentValue}
                         onChange={(event)=>{
@@ -42,39 +48,42 @@ class StepThree extends React.Component {
                             saveArrayInput(el.id, el.value, type);
                         }}
                     />
-                    {deleteButton}
+                    
                 </div>
             )
         })
 
         return (
             <div>
-                <h1>#3: Write Instructions</h1>
+                <div className={styles.topContainer}>
+                    <h1>Recipe Steps</h1>
+                    <button 
+                        className={`btn btn-secondary`}
+                        onClick={ ()=> {
+                            changeStep(false)
+                        }}>
+                        Back
+                    </button>
+                </div>
 
                 {instructionsArr}
+                <div className={styles.buttonContainer}>
+                    <button 
+                        className={`btn btn-light`}
+                        onClick={ ()=> {
+                            addInputBar(type);
+                        }}>
+                        Add step
+                    </button>
 
-                <button 
-                    className={`btn btn-light`}
-                    onClick={ ()=> {
-                        addInputBar(type);
-                    }}>
-                    Add step
-                </button>
-
-                <button 
-                    className={`btn btn-success`}
-                    onClick={ ()=> {
-                        createRecipe()
-                    }}>
-                    Create Recipe!
-                </button>
-                <button 
-                    className={`btn btn-secondary`}
-                    onClick={ ()=> {
-                        changeStep(false)
-                    }}>
-                    Back
-                </button>
+                    <button 
+                        className={`btn btn-success`}
+                        onClick={ ()=> {
+                            createRecipe()
+                        }}>
+                        Create Recipe!
+                    </button>
+                </div>
             </div>
         );
     }

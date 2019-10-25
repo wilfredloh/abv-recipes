@@ -85,6 +85,7 @@ class Recipe extends React.Component {
 
         let editRecipeNameButton = this.state.editButton.name ? '' :
             <button
+                className="btn btn-outline-secondary"
                 onClick={()=>{
                     this.state.editButton.name = true;
                     this.state.confirmEditButton.name = true;
@@ -100,6 +101,7 @@ class Recipe extends React.Component {
         if (recipe) {
             recipeNameInput = this.state.confirmEditButton.name ? <div>
                 <input 
+                    className="form-control"
                     defaultValue={recipe.name}
                     onChange={(event)=>{
                         this.updateRecipeInputState(event.target.value, recipe.id, 'name');
@@ -107,6 +109,7 @@ class Recipe extends React.Component {
                     }}
                 />
                 <button
+                    className="btn btn-outline-success"
                     onClick={()=>{
                         this.state.editButton.name = false;
                         this.state.confirmEditButton.name = false;
@@ -119,6 +122,7 @@ class Recipe extends React.Component {
                 >Finish Edit
                 </button>
                 <button
+                    className="btn btn-outline-secondary"
                     onClick={()=>{
                         this.state.editButton.name = false;
                         this.state.confirmEditButton.name = false;
@@ -152,7 +156,7 @@ class Recipe extends React.Component {
                 </div>
             </div>
         : 
-        <div>
+        <div className={styles.recipeEmpty}>
             <img src="https://media.tenor.com/images/db6a6137bb717491813f56eb7900d617/tenor.gif"/>
             <p>Click on a recipe to view more</p>
         </div>;

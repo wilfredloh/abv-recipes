@@ -1,0 +1,34 @@
+.stepContainer {
+    width: 50%;
+    margin: 0 auto;
+}
+
+.topContainer{
+    display: flex;
+    justify-content: space-between;
+}
+
+.topContainer > button {
+    height: 10%;
+    transform: translateY(50%);
+}
+.buttonContainer{
+    margin: 1rem 0;
+    display: flex;
+    justify-content: space-between;
+}
+
+.buttonContainerSingle{
+    display: flex;
+    justify-content: flex-end;
+}
+
+.newInput {
+    display: flex;
+    justify-content: space-between;
+}
+
+.reminder {
+    margin: 1rem;
+    color: red;
+}
