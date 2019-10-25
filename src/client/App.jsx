@@ -1,8 +1,8 @@
 import React from 'react';
 import { hot } from 'react-hot-loader';
 
-import Form from 'components/Form/Form';
-import Home from 'components/Home/Home';
+import Form from './components/Form/Form.jsx';
+import Home from './components/Home/Home.jsx';
 
   // React Router Imports
 import { BrowserRouter } from "react-router-dom";
