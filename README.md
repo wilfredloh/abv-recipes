@@ -27,8 +27,7 @@ psql -d DATABASE_NAME -U USERNAME -f seed.sql
 ```
 
 # Wireframes
-![alt_text](https://github.com/wilfredloh/abv-recipes/blob/master/wire.png)
+![alt_text](https://github.com/wilfredloh/abv-recipes/blob/master/documents/wire.png)
 
 # Entity Relationship Diagram
-![alt_text](https://github.com/wilfredloh/abv-recipes/blob/master/erd.png)
-
+![alt_text](https://github.com/wilfredloh/abv-recipes/blob/master/documents/erdiagram.png)
