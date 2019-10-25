@@ -7,28 +7,41 @@ class Recipe extends React.Component {
     constructor() {
         super();
         this.state = {
-            groupable : false,
+            groupable: false,
+            editButton: {
+                name: false,
+                about: false,
+            },
+            confirmEditButton: {
+                name: false,
+                about: false,
+            },
+            recipe: {
+                name: null,
+                about: null,
+            }
         }
         this.toggleInput = this.toggleInput.bind(this);
     }
 
     toggleInput(){
         let grouped = this.state.groupable;
-        if (grouped) {
-            grouped = false;
-        } else {
-            grouped = true;
-        }
+        grouped = !grouped;
         this.setState({groupable : grouped});
     }
 
-    render() {
+    updateRecipeInputState(inputValue, id, type) {
+        this.state.recipe[type] = inputValue
+        this.setState({ recipe : this.state.recipe });
+    }
 
+    render() {
         const {
             ingredients,
             instructions,
             recipe,
             selectedImages,
+            updateRecipeInput,
         } = this.props;
 
         let container = '';
@@ -36,20 +49,20 @@ class Recipe extends React.Component {
         let wetIngredients = '';
         let images = selectedImages ? selectedImages.map((images, i)=>{
             return <img key={i} src={images.url}/>
-        }) : <p>No images!</p>;
+        }) : <p>No images</p>;
         
         if (this.state.groupable) {
             dryIngredients = ingredients ?  ingredients.map((ingredient, i)=>{
                 if (ingredient.type === 'dry') {
                     return <li key={i}>{ingredient.amount} {ingredient.measurement} {ingredient.name} </li>
                 }
-            }) : <p>No dry ingredients!</p>;
+            }) : <p>No dry ingredients</p>;
 
             wetIngredients = ingredients ?  ingredients.map((ingredient, i)=>{
                 if (ingredient.type === 'wet') {
                     return <li key={i}>{ingredient.amount} {ingredient.measurement} {ingredient.name}</li>
                 }
-            }) : <p>No wet ingredients!</p>;
+            }) : <p>No wet ingredients</p>;
 
             container = 
             <div>
@@ -61,17 +74,71 @@ class Recipe extends React.Component {
         } else {
             container = ingredients ?  ingredients.map((ingredient, i)=>{
                 return <li key={i}>{ingredient.amount} {ingredient.measurement} {ingredient.name}</li>
-            }) : <p>No ingredients!</p>;
+            }) : <p>No ingredients</p>;
         }
 
         let instructionsCont = instructions ? instructions.map((instruction, i)=>{
             return <p key={i}>{i+1}. {instruction.description}</p>
-        }) : <p>No instructions!</p>;
+        }) : <p>No instructions</p>;
+        
+        
+
+        let editRecipeNameButton = this.state.editButton.name ? '' :
+            <button
+                onClick={()=>{
+                    this.state.editButton.name = true;
+                    this.state.confirmEditButton.name = true;
+                    this.setState({
+                        editButton : this.state.editButton,
+                        confirmEditButton : this.state.confirmEditButton
+                    });
+                }}
+                >Edit
+            </button>
+
+        let recipeNameInput = '';
+        if (recipe) {
+            recipeNameInput = this.state.confirmEditButton.name ? <div>
+                <input 
+                    defaultValue={recipe.name}
+                    onChange={(event)=>{
+                        this.updateRecipeInputState(event.target.value, recipe.id, 'name');
+
+                    }}
+                />
+                <button
+                    onClick={()=>{
+                        this.state.editButton.name = false;
+                        this.state.confirmEditButton.name = false;
+                        this.setState({
+                            editButton : this.state.editButton,
+                            confirmEditButton : this.state.confirmEditButton
+                        });
+                        updateRecipeInput(this.state.recipe.name, recipe.id, 'name');
+                    }}
+                >Finish Edit
+                </button>
+                <button
+                    onClick={()=>{
+                        this.state.editButton.name = false;
+                        this.state.confirmEditButton.name = false;
+                        this.setState({
+                            editButton : this.state.editButton,
+                            confirmEditButton : this.state.confirmEditButton
+                        });
+                    }}
+                >Cancel
+                </button>
+            </div> 
+            : <h2>{recipe.name}</h2>
+        }
         
         
         let recipeCont = recipe ? 
             <div>
-                <h2>{recipe.name}</h2>
+                {recipeNameInput}
+                {editRecipeNameButton}
+
                 <p>{recipe.about}</p>
                 {images}
                 <div>

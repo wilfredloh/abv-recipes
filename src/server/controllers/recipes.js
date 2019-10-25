@@ -196,6 +196,32 @@ module.exports = (db) => {
     }
   };
 
+  let updateRecipeInput = (request, response) => {
+
+    console.log('in update recipe input');
+
+    let updatedRecipe = request.body;
+
+    db.recipes.updateRecipeInput( updatedRecipe, (error, recipe) => {
+ 
+      if (error) {
+        console.error('error getting recipe', error);
+        response.status(500);
+        response.send('server error');
+
+      } else {
+        
+        if( recipe === null ){
+          response.status(404);
+          response.send('not found');
+
+        }else{
+          response.send(recipe);
+        }
+      }
+    });
+  };
+
   return {
     getRecipes,
     getImages,
@@ -205,6 +231,7 @@ module.exports = (db) => {
     getInstructions,
     createRecipe,
     deleteRecipe,
-    getRecipeWithIng
+    getRecipeWithIng,
+    updateRecipeInput,
   }
 };

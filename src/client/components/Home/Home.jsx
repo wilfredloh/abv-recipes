@@ -21,6 +21,7 @@ class Home extends React.Component {
         this.deleteRecipe = this.deleteRecipe.bind(this);
         this.setWord = this.setWord.bind(this);
         this.toCreateForm = this.toCreateForm.bind(this);
+        this.updateRecipeInput = this.updateRecipeInput.bind(this);
     }
 
     componentDidMount() {
@@ -34,20 +35,6 @@ class Home extends React.Component {
             .then(res => res.json())
             .then(json => this.setState({recipes: json}))
             .catch(error => console.error('error', error))
-    }
-
-    toCreateForm() {
-        setTimeout(()=>{
-        this.props.history.push('/new');
-        }, 100);
-    }
-
-    setWord(event) {
-        let input = event.target.value.toLowerCase();
-        this.setState({
-            searchWord : input,
-            recipe : null,
-        });
     }
 
     chooseRecipe(id) {
@@ -103,6 +90,57 @@ class Home extends React.Component {
             .catch(error => console.error('Error: ', error))
     }
 
+    setWord(event) {
+        let input = event.target.value.toLowerCase();
+        this.setState({
+            searchWord : input,
+            recipe : null,
+        });
+    }
+
+    toCreateForm() {
+        setTimeout(()=>{
+        this.props.history.push('/new');
+        }, 100);
+    }
+
+    //UPDATE SECTION!!! ****************************
+    /*
+    1. add input bar
+    2. save single input
+    3. save array input
+    4. delete input bar
+    5. toggle check input
+    */
+    updateRecipeInput(inputValue, id, type) {
+        let url = `/recipes/input`;
+        this.state.recipe[type] = inputValue
+        this.setState({ recipe : this.state.recipe });
+        let data = {
+            id: id,
+            type: type,
+            name: inputValue,
+        }
+        this.runFetch(url, data)
+    }
+
+    runFetch(url, data) {
+        fetch(url, {
+            method: 'PUT',
+            body: JSON.stringify(data),
+            headers: {
+              'Content-Type': 'application/json'
+            }
+          })
+          .then(res => {
+            console.log('updated!')
+          })
+          .catch(error => console.error('Error: ', error))
+    }
+
+    //END UPDATE SECTION *****************************
+
+
     render() {
         return (
             <div>
@@ -132,6 +170,7 @@ class Home extends React.Component {
                         instructions={this.state.instructions}
                         recipe={this.state.recipe}
                         selectedImages={this.state.selectedImages}
+                        updateRecipeInput={this.updateRecipeInput}
                     />
                 </div>
             </div>
