@@ -54,3 +54,22 @@
     flex-flow: column;
     align-items: center;
 }
+
+.recipeName{
+    display: flex;
+    justify-content: space-between;
+}
+
+.recipeName input{
+    margin: 0 1rem 0 0;
+}
+.recipeName button{
+    width: 10rem;
+}
+
+.ingredientsGroup {
+    display: flex;
+    justify-content: flex-start;
+    margin: 2rem;
+    background-color: white;
+}

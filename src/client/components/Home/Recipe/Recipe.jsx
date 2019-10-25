@@ -99,7 +99,8 @@ class Recipe extends React.Component {
 
         let recipeNameInput = '';
         if (recipe) {
-            recipeNameInput = this.state.confirmEditButton.name ? <div>
+            recipeNameInput = this.state.confirmEditButton.name ? 
+            <React.Fragment>
                 <input 
                     className="form-control"
                     defaultValue={recipe.name}
@@ -119,7 +120,7 @@ class Recipe extends React.Component {
                         });
                         updateRecipeInput(this.state.recipe.name, recipe.id, 'name');
                     }}
-                >Finish Edit
+                >Update
                 </button>
                 <button
                     className="btn btn-outline-secondary"
@@ -133,22 +134,29 @@ class Recipe extends React.Component {
                     }}
                 >Cancel
                 </button>
-            </div> 
+            </React.Fragment>            
             : <h2>{recipe.name}</h2>
         }
         
         
         let recipeCont = recipe ? 
             <div>
-                {recipeNameInput}
-                {editRecipeNameButton}
-
+                <div className={styles.recipeName}>
+                    {recipeNameInput}
+                    {editRecipeNameButton}
+                </div>
                 <p>{recipe.about}</p>
                 {images}
                 <div>
-                    <h3>Ingredients</h3>
-                    <input type="checkbox" name="name" value='test' onClick={this.toggleInput}></input> <span>Groupable</span>
-                    {container}
+                    <div className={styles.ingredientsGroup}>
+                        <h3>Ingredients</h3>
+                        <div>
+                            <input type="checkbox" name="name" value='test' onClick={this.toggleInput}></input> <span>Groupable</span>
+                        </div>
+                    </div>
+                    <div>
+                        {container}
+                    </div>
                 </div>
                 <div>
                     <h3>Instructions</h3>
