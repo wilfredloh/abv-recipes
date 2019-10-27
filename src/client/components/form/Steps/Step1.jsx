@@ -46,6 +46,7 @@ class StepOne extends React.Component {
                         className="form-control"
                         id={i}
                         value={currentValue}
+                        placeholder="http://www.google.com"
                         onChange={(event)=>{
                             let el = event.target;
                             saveArrayInput(el.id, el.value, type);
@@ -73,6 +74,7 @@ class StepOne extends React.Component {
                 <input 
                     className="form-control"
                     defaultValue={name}
+                    placeholder="Mushroom pizza"
                     onChange={(event)=>{
                         saveSingleInput(event.target.value, 'name');
                     }}
@@ -81,6 +83,7 @@ class StepOne extends React.Component {
                 <textarea 
                     className="form-control"
                     defaultValue={about}
+                    placeholder="This pizza is made with..."
                     onChange={(event)=>{
                         saveSingleInput(event.target.value, 'about');
                     }}

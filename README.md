@@ -7,9 +7,9 @@
 
 # Features
 - Search for recipes by recipe or ingredient name
-- Users can view recipes and select a single recipe all on one page
-- Users can create recipes that can hold multiple images, ingredients and instructions
-- Ingredients can be shared with other recipes and are groupable (eg. dry vs wet)
+- Users can view all recipes and see more details of a selected recipe all on one page
+- Users can create recipes that can each contain multiple images, ingredients and instructions
+- Ingredients can be re-used for other recipes and are also groupable (eg. dry vs wet)
 
 # Installation
 1. Install dependencies

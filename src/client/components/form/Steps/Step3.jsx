@@ -40,6 +40,7 @@ class StepThree extends React.Component {
                         {deleteButton}
                     </div>
                     <textarea 
+                        placeholder={`Prepare 500ml of water...`}
                         className="form-control"
                         id={i}
                         value={currentValue}
