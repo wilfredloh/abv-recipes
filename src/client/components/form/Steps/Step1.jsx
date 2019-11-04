@@ -5,6 +5,13 @@ import styles from '../style.scss';
 
 class StepOne extends React.Component {
 
+    constructor() {
+        super()
+        this.state = {
+            checkName : false,
+            reminder: ''
+        }
+    }
     render() {
         const { 
             addInputBar,
@@ -50,7 +57,6 @@ class StepOne extends React.Component {
                         onChange={(event)=>{
                             let el = event.target;
                             saveArrayInput(el.id, el.value, type);
-
                         }}
                     />
                     
@@ -77,6 +83,9 @@ class StepOne extends React.Component {
                     placeholder="Mushroom pizza"
                     onChange={(event)=>{
                         saveSingleInput(event.target.value, 'name');
+                        if (event.target.value){
+                            this.setState( {checkName: true} )
+                        }
                     }}
                 />
                 <p>About</p>
@@ -102,10 +111,16 @@ class StepOne extends React.Component {
                     <button 
                         className={`btn btn-success`}
                         onClick={()=> {
-                            changeStep(true);
+                            if (this.state.checkName) {
+                                changeStep(true);
+                            } else {
+                                this.setState({reminder: 'Please fill in a recipe name!'});
+                            }
+                            this.state.checkName = false
                         }}>
                         Choose Ingredients
                     </button>
+                <p className={styles.reminder}>{this.state.reminder}</p>
                     
                 </div>
             </div>

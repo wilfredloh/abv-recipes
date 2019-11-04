@@ -31,7 +31,7 @@ if( process.env.DATABASE_URL ){
 const pool = new pg.Pool(configs);
 
 pool.on('error', function (err) {
-  console.log('idle client error', err.message, err.stack);
+console.log('idle client error', err.message, err.stack);
 });
 
 module.exports = {
