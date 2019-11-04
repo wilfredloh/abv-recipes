@@ -38,6 +38,8 @@ class StepTwo extends React.Component {
                         Back
                     </button>
                 </div>
+                <p className={styles.reminder}>{reminder}</p>
+
                 <input
                     className="form-control"
                     placeholder="search ingredient" onChange={this.setWord}></input>
@@ -47,7 +49,6 @@ class StepTwo extends React.Component {
                     searchWord = {searchWord}
                     toggleCheck = {toggleCheck}
                 />
-                <p className={styles.reminder}>{reminder}</p>
 
                 <div className={styles.buttonContainerSingle}>
                     <button 

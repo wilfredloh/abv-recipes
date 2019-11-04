@@ -8,7 +8,6 @@ class StepOne extends React.Component {
     constructor() {
         super()
         this.state = {
-            checkName : false,
             reminder: ''
         }
     }
@@ -76,6 +75,8 @@ class StepOne extends React.Component {
                         Back
                     </button>
                 </div>
+                <p className={styles.reminder}>{this.state.reminder}</p>
+
                 <p>Title</p>
                 <input 
                     className="form-control"
@@ -83,9 +84,6 @@ class StepOne extends React.Component {
                     placeholder="Mushroom pizza"
                     onChange={(event)=>{
                         saveSingleInput(event.target.value, 'name');
-                        if (event.target.value){
-                            this.setState( {checkName: true} )
-                        }
                     }}
                 />
                 <p>About</p>
@@ -99,6 +97,7 @@ class StepOne extends React.Component {
                 />
 
                 {imagesArr}
+
                 
                 <div className={styles.buttonContainer}>
                     <button 
@@ -111,16 +110,14 @@ class StepOne extends React.Component {
                     <button 
                         className={`btn btn-success`}
                         onClick={()=> {
-                            if (this.state.checkName) {
+                            if (recipe.name) {
                                 changeStep(true);
                             } else {
                                 this.setState({reminder: 'Please fill in a recipe name!'});
                             }
-                            this.state.checkName = false
                         }}>
                         Choose Ingredients
                     </button>
-                <p className={styles.reminder}>{this.state.reminder}</p>
                     
                 </div>
             </div>

@@ -5,6 +5,12 @@ import styles from '../style.scss';
 
 class StepThree extends React.Component {
 
+    constructor() {
+        super()
+        this.state = {
+            reminder: ''
+        }
+    }
     render() {
         const {
             addInputBar,
@@ -66,7 +72,8 @@ class StepThree extends React.Component {
                         Back
                     </button>
                 </div>
-
+                <p className={styles.reminder}>{this.state.reminder}</p>
+                
                 {instructionsArr}
                 <div className={styles.buttonContainer}>
                     <button 
@@ -80,7 +87,11 @@ class StepThree extends React.Component {
                     <button 
                         className={`btn btn-success`}
                         onClick={ ()=> {
-                            createRecipe()
+                            if (recipe.instructions[0]) {
+                                createRecipe()
+                            } else {
+                                this.setState({reminder: 'Please fill in at least 1 instruction!'});
+                            }
                         }}>
                         Create Recipe!
                     </button>
