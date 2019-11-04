@@ -90,7 +90,7 @@ class StepThree extends React.Component {
                             if (recipe.instructions[0]) {
                                 createRecipe()
                             } else {
-                                this.setState({reminder: 'Please fill in at least 1 instruction!'});
+                                this.setState({reminder: 'Please fill in (min) Step 1!'});
                             }
                         }}>
                         Create Recipe!
